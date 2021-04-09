@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+// Font Setup
+@font-face {
+  font-family: "NeueHaasGrotesk";
+  src: url("../assets/fonts/NHaasGrotesk/NHaasGroteskTXPro-55Rg.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "NeueHaasUnica";
+  src: url("../assets//fonts/NeueHaasUnica/NeueHaasUnica-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "NeueHaasDisplay";
+  src: url("../assets//fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.ttf")
+    format("truetype");
+}
+
+
+// Custom Color
+$md-pink: #f64c72;
+$md-blue: #082b9d;
+$md-black: #0b0b0b;
+$md-default: yellow;
+
+// Update Bulma's global variables
+$dark: $md-black;
+$primary: $md-blue;
+$link: $md-pink;
+$size-1: 4rem;
+$family-sans-serif: "NeueHaasGrotesk";
+$family-primary: "NeueHaasDisplay";
+$family-secondary: "NeueHaasUnica";
+$radius: 0px;
+$hero-body-padding: 0;
+
+// Custom CSS
+
+ol {
+  list-style-type: none;
+}
+
+// Bulma Import
+@import "~bulma";

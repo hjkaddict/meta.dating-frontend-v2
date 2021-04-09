@@ -1,0 +1,93 @@
+main [view]
+  - burger menu [component]
+    -- link
+
+  - project container [component]
+    -- semester list
+    -- semester description
+      --- tags
+      --- description
+      --- select button
+    -- project description
+
+bots [view]
+  - burger menu [component]
+  - button back [component]
+  - bots-container 
+    -- bot list [component]
+      --- bot [component]
+      
+    -- bot description      
+      --- tags
+      --- image
+      --- description
+      --- button select
+      --- button deselect
+
+    -- button let's chat
+
+chat [view] // with one bot
+- button close [component]
+
+- message container [component]
+-- message left [component]
+--- picture left
+--- bot name left
+--- message left
+
+-- message right [component]
+--- message right
+
+- chat input container [component]
+-- input line
+-- button send
+-- button save / export conversation
+
+chat [view] // with multiple bots
+- button close [component]
+
+- message container [component]
+-- message left [component]
+--- picture left
+--- bot name left
+--- message left
+
+-- message right [component]
+--- picture right
+--- bot name right
+--- message right
+
+- control panel container
+-- button info
+-- button slower
+-- button play / pause
+-- button faster
+-- button save / export conversation
+
+chat [view] // with metadata enabled
+(basically the same as chat, but with added elements, as following)
+
+- message container [component]
+-- message left [component]
+--- picture left
+--- bot name left
+--- metadata container left [component]
+---- intents data
+---- entity data
+---- all we can get from api
+--- message left
+
+-- message right [component]
+--- picture right
+--- bot name right
+--- metadata container right [component]
+---- intents data
+---- entity data
+---- all we can get from api
+--- message right
+
+team [view]
+
+imprint [view]
+
+login [view]
