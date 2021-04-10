@@ -1,40 +1,40 @@
 <template>
   <section>
-    <div
-      class="columns m-0 reverse-columns"
-    >
+    <div class="columns m-0 reverse-columns">
       <semester-list
         class="column is-one-third"
+        :class="{ 'p-5': isMobile() }"
         @semester-info="storeSelectedSemester"
       ></semester-list>
-      <project-description
+
+      <project-overview
         class="column"
-        v-if="!selectedSemester"
-      ></project-description>
+        :class="{ 'is-hidden-desktop': selectedSemester}"
+      ></project-overview>
+
       <semester-description
-        class="column is-hidden-mobile"
+        class="column is-hidden-mobile is-fullheight"
         v-if="selectedSemester"
         :metadata="selectedSemester"
       ></semester-description>
     </div>
-    <div></div>
   </section>
 </template>
 
 <script>
 import SemesterList from "./SemesterList";
-import ProjectDescription from "./ProjectDescription";
+import ProjectOverview from "./ProjectOverview";
 import SemesterDescription from "./SemesterDescription";
 
 export default {
   data() {
     return {
-      selectedSemester: false,
+      selectedSemester: null,
     };
   },
   components: {
     SemesterList,
-    ProjectDescription,
+    ProjectOverview,
     SemesterDescription,
   },
   methods: {
@@ -51,7 +51,10 @@ export default {
 }
 
 .column {
-  border: 1px solid red;
+  /* border: 1px dashed white; */
+}
+.is-fullheight {
+  height: 100vh;
 }
 
 @media (max-width: 767px) {

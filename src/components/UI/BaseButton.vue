@@ -1,15 +1,21 @@
 <template>
-  <button class="button is-link is-outlined">{{buttonTitle}}</button>
+  <button
+    class="button is-link is-outlined"
+    :disabled="disabled"
+    :class="{ 'is-focused': focus }"
+  >
+    {{ buttonTitle }}
+  </button>
 </template>
 
 <script>
 export default {
-  props: ['buttonTitle']
+  props: ["buttonTitle", "focus", "disabled"],
+  methods: {},
 };
 </script>
 
 <style scoped>
-
 .button {
   border: 5px solid #f64c72;
 }

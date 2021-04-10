@@ -35,7 +35,6 @@ export default {
           mitarbeiter: [
             "Alexej Bormatenkow",
             "Dominikus Muncha",
-            "Daniel Franke",
           ],
           tutor: "Hyungjoong Kim",
           description:
@@ -59,7 +58,6 @@ export default {
           mitarbeiter: [
             "Alexej Bormatenkow",
             "Dominikus Muncha",
-            "Daniel Franke",
           ],
           tutor: "Hyungjoong Kim",
           description:
@@ -73,7 +71,6 @@ export default {
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
             "Alexej Bormatenkow",
-            "Dominikus Muncha",
             "Daniel Franke",
           ],
           tutor: "Hyungjoong Kim",
@@ -87,7 +84,6 @@ export default {
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
-            "Alexej Bormatenkow",
             "Dominikus Muncha",
             "Daniel Franke",
           ],
@@ -103,7 +99,6 @@ export default {
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
             "Alexej Bormatenkow",
-            "Dominikus Muncha",
             "Daniel Franke",
           ],
           tutor: "Hyungjoong Kim",

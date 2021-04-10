@@ -1,31 +1,49 @@
 <template>
   <section>
-    <div class="columns m-0">
+    <div class="columns m-0" :class="{'p-5':isMobile()}">
+
       <bot-list
-        class="column is-one-third"
+        class="column is-one-third has-background-primary"
         :botlist="semester"
         @this-bot="receivedId"
+        @emit-chosen="receiveChosen"
+        :chosenBots="chosenBots"
       ></bot-list>
+
       <bot-description
-        class="column is-two-thirds is-hidden-mobile"
+        class="column is-two-thirds is-hidden-mobile is-fullheight"
         :metadata="selectedBot"
+        :chosenBots="chosenBots"
+        @emit-chosen="receiveChosen"
       ></bot-description>
     </div>
+    <control-panel
+      class="control-panel"
+      :chosenBots="chosenBots"
+    ></control-panel>
   </section>
 </template>
 
 <script>
 import BotList from "@/components/Bots/BotList";
 import BotDescription from "@/components/Bots/BotDescription";
+import ControlPanel from "@/components/Bots/ControlPanel";
+
 export default {
   components: {
     BotList,
     BotDescription,
+    ControlPanel,
   },
   methods: {
     receivedId(id) {
       const bot = this.semester.bots.find((bot) => bot.id == id);
       this.selectedBot = bot;
+    },
+    receiveChosen(choose, id) {
+      this.semester.bots.find((bot) => bot.id == id).isChosen = choose;
+      const filteredBots = this.semester.bots.filter(bot => bot.isChosen === true)
+      this.chosenBots = filteredBots
     },
   },
 
@@ -33,9 +51,11 @@ export default {
     return {
       semesterId: this.$route.params.id,
       selectedBot: "",
+      chosenBots: [],
       semester: {
         title: "AIOT#2 - Darkbot",
         term: "wintersemester2020-21",
+
         bots: [
           {
             id: 0,
@@ -44,10 +64,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "000Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 1,
@@ -56,10 +74,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "111Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 2,
@@ -68,10 +84,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 3,
@@ -80,10 +94,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 4,
@@ -92,10 +104,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 5,
@@ -104,10 +114,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 6,
@@ -116,10 +124,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
           {
             id: 7,
@@ -128,10 +134,8 @@ export default {
             platform: "Watson Assistant V2",
             description:
               "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-            ],
+            students: ["Beringar Haas", "Sigmund Meier"],
+            isChosen: false
           },
         ],
       },
@@ -146,6 +150,19 @@ export default {
   width: 100vw;
 }
 .column {
-  border: 1px solid red;
+  /* border: 1px dashed white; */
+  
+}
+
+.is-fullheight {
+  height: 100vh;
+}
+
+.control-panel {
+  position: fixed;
+  height: 8vh;
+  bottom: 0;
+  width: 100vw;
+  z-index: 2;
 }
 </style>

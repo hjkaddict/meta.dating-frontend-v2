@@ -17,7 +17,7 @@ export default {
 
   methods: {
     filterData() {
-      return (this.title === "description" || this.title === 'id') ? false : true
+      return (this.title === "description" || this.title === 'id' || this.title ==='isChosen') ? false : true
     },
   },
 };

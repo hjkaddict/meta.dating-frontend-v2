@@ -1,7 +1,7 @@
 <template>
   <section>
     <div
-      class="nav-menu has-background-dark has-text-white has-text-centered is-flex is-justify-content-center is-align-items-center is-family-primary is-size-1"
+      class="nav-list has-background-dark has-text-white has-text-centered is-flex is-justify-content-center is-align-items-center is-family-primary is-size-1"
       v-if="isClicked"
     >
       <ol class="p-6">
@@ -57,7 +57,12 @@ section {
   right: 0;
   z-index: 1;
 }
-.nav-menu {
+
+.level {
+
+}
+
+.nav-list {
   position: fixed;
   width: 100vw;
   height: 100vh;

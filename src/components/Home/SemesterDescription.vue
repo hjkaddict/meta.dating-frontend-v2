@@ -1,6 +1,6 @@
 <template>
   <section
-    class="is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-background-primary"
+    class="is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-background-primary p-2"
   >
     <meta-tag
       v-for="(value, key) in this.metadata"
@@ -8,8 +8,16 @@
       :title="key"
       :addon="value"
     ></meta-tag>
-    <div>{{ metadata.description }}</div>
-    <router-link :to="'/bots/' + this.metadata.id"
+
+    <div :class="{ 'pr-5': !isMobile() }">{{ metadata.description }}</div>
+
+    <router-link
+      class="p-5"
+      :class="{
+        'is-align-self-flex-end': !isMobile(),
+        'is-align-self-center': isMobile(),
+      }"
+      :to="'/bots/' + this.metadata.id"
       ><base-button :buttonTitle="'Zum Projekt'"></base-button
     ></router-link>
   </section>
@@ -28,13 +36,6 @@ export default {
   data() {
     return {};
   },
-
-  methods: {
-    logData() {
-      console.log(this.url);
-    },
-  },
+  methods: {},
 };
 </script>
-
-<style scoped></style>

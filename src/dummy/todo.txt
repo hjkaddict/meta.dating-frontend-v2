@@ -1,0 +1,9 @@
+- back button 
+
+
+
+
+- Burger menu Layout 
+- Tablet breakpoint : smaller fonts but same layout as desktop
+- Back button from Bots view (it should not going back to landing page but each semester) :
+https://forum.vuejs.org/t/dynamic-components-handling-browser-back-button/28232

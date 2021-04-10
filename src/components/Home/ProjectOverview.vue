@@ -1,7 +1,7 @@
 <template>
-  <section class="is-flex is-flex-direction-column is-align-items-flex-start">
-    <figure class="image">
-      <img src="@/assets/img/logo.png">
+  <section class="is-flex is-flex-direction-column is-align-items-flex-start p-5">
+    <figure>
+      <img src="@/assets/img/logo.png" width="400">
     </figure>
 
     <div class="description">
@@ -22,6 +22,8 @@
 </template>
 
 <style scoped>
-
+.description {
+  width: 90%
+}
 
 </style>

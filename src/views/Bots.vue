@@ -1,16 +1,21 @@
 <template>
   <section>
-    <div class="hero is-fullheight is-dark">
+    <div class="hero is-fullheight is-primary">
       <div class="hero-head">
         <Nav />
       </div>
+      <div class="blank is-hidden-desktop"></div>
 
       <div
         class="hero-body"
-        :class="{ 'is-flex': isMobile(), 'is-align-items-flex-start': isMobile() }"
+        :class="{
+          'is-flex': isMobile(),
+          'is-align-items-flex-start': isMobile(),
+        }"
       >
         <bots-container></bots-container>
       </div>
+
     </div>
   </section>
 </template>
@@ -18,29 +23,25 @@
 <script>
 import Nav from "../components/Nav/Nav";
 import BotsContainer from "@/components/Bots/BotsContainer";
+// import ControlPanel from "@/components/Bots/ControlPanel";
 
 export default {
   components: {
     Nav,
     BotsContainer,
+    // ControlPanel,
   },
   methods: {
-    isMobile() {
-      if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
+
   },
 };
 </script>
 
 <style scoped>
-@media (max-width: 767px) {
+.blank {
+  height: 80px;
 }
+.hero-body {
+}
+
 </style>
