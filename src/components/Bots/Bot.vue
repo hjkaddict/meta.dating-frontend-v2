@@ -8,7 +8,7 @@
     </div>
 
     <bot-description
-      class="is-hidden-desktop has-background-dark"
+      class="is-hidden-tablet has-background-dark"
       v-if="select"
       :metadata="bot"
       :chosenBots="chosenBots"

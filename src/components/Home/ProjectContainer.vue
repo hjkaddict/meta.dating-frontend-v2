@@ -1,22 +1,28 @@
 <template>
   <section>
-    <div class="columns m-0 reverse-columns">
-      <semester-list
-        class="column is-one-third"
-        :class="{ 'p-5': isMobile() }"
-        @semester-info="storeSelectedSemester"
-      ></semester-list>
 
-      <project-overview
-        class="column"
-        :class="{ 'is-hidden-desktop': selectedSemester}"
-      ></project-overview>
+    <div class="container is-fluid p-0">
+      <div
+        class="columns m-0"
+        :class="{ 'is-flex is-flex-direction-column-reverse': isMobile() }"
+      >
+        <semester-list
+          class="column is-one-third"
+          :class="{ 'p-5': isMobile() }"
+          @semester-info="storeSelectedSemester"
+        ></semester-list>
 
-      <semester-description
-        class="column is-hidden-mobile is-fullheight"
-        v-if="selectedSemester"
-        :metadata="selectedSemester"
-      ></semester-description>
+        <project-overview
+          class="column"
+          :class="{ 'is-hidden-tablet': selectedSemester }"
+        ></project-overview>
+
+        <semester-description
+          class="column is-hidden-mobile is-fullheight"
+          v-if="selectedSemester"
+          :metadata="selectedSemester"
+        ></semester-description>
+      </div>
     </div>
   </section>
 </template>
@@ -46,21 +52,12 @@ export default {
 </script>
 
 <style scoped>
+
 .columns {
-  width: 100vw;
+  /* width: 100vw; */
+  /* max-width: 100%; */
 }
 
 .column {
-  /* border: 1px dashed white; */
-}
-.is-fullheight {
-  height: 100vh;
-}
-
-@media (max-width: 767px) {
-  .reverse-columns {
-    flex-direction: column-reverse;
-    display: flex;
-  }
 }
 </style>

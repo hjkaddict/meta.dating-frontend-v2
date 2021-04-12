@@ -4,13 +4,8 @@
       <div class="hero-head">
         <Nav />
       </div>
-      <div
-        class="hero-body"
-        :class="{
-          'is-flex': isMobile(),
-          'is-align-items-flex-start': isMobile(),
-        }"
-      >
+      <div class="blank is-hidden-desktop"></div>
+      <div class="hero-body">
         <project-container></project-container>
       </div>
     </div>
@@ -26,16 +21,12 @@ export default {
     Nav,
     ProjectContainer,
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
-.hero-head {
-
-}
-.hero-body {
+.blank {
+  height: 60px;
 }
 </style>

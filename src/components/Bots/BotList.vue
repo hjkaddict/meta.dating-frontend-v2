@@ -41,7 +41,6 @@ export default {
     emitBus(choose, id) {
       this.$emit("emit-chosen", choose, id);
     },
-
   },
   data() {
     return {

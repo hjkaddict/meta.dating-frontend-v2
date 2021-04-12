@@ -39,7 +39,7 @@ Bots [view]
 
     -- ControlPanel [component]
 
-chat [view] // with one bot
+Chat [view] // with one bot
 - button close [component]
 
 - message container [component]
