@@ -39,43 +39,28 @@ Bots [view]
 
     -- ControlPanel [component]
 
-Chat [view] // with one bot
-- button close [component]
 
-- message container [component]
--- message left [component]
---- picture left
---- bot name left
---- message left
 
--- message right [component]
---- message right
+Chat [view] // with multiple bots
+  - ButtonClose [component]
 
-- chat input container [component]
--- input line
--- button send
--- button save / export conversation
+  - MessageContainer [component]
+    -- MessageLeft [component]
+      --- Picture left
+      --- Bot name left
+      --- Message left
 
-chat [view] // with multiple bots
-- button close [component]
+    -- MessageRight [component]
+      --- Picture right
+      --- Bot name right
+      --- Message right
 
-- message container [component]
--- message left [component]
---- picture left
---- bot name left
---- message left
-
--- message right [component]
---- picture right
---- bot name right
---- message right
-
-- control panel container
--- button info
--- button slower
--- button play / pause
--- button faster
--- button save / export conversation
+  - control panel container
+    -- button info
+    -- button slower
+    -- button play / pause
+    -- button faster
+    -- button save / export conversation
 
 chat [view] // with metadata enabled
 (basically the same as chat, but with added elements, as following)
@@ -98,6 +83,27 @@ chat [view] // with metadata enabled
 ---- entity data
 ---- all we can get from api
 --- message right
+
+Chat [view] // with one bot
+- Button Close [component]
+
+- message container [component]
+-- message left [component]
+--- picture left
+--- bot name left
+--- message left
+
+-- message right [component]
+--- message right
+
+- chat input container [component]
+-- input line
+-- button send
+-- button save / export conversation
+
+
+
+
 
 team [view]
 

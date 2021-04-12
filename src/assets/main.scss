@@ -24,12 +24,13 @@
 $md-pink: #f64c72;
 $md-blue: #082b9d;
 $md-black: #0b0b0b;
-$md-default: yellow;
+$md-warning: yellow;
 
 // Update Bulma's global variables
 $dark: $md-black;
 $primary: $md-blue;
 $link: $md-pink;
+$warning: $md-warning;
 $size-1: 4rem;
 $family-sans-serif: "NeueHaasGrotesk";
 $family-primary: "NeueHaasDisplay";

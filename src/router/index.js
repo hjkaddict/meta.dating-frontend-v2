@@ -6,6 +6,7 @@ import Team from "../views/Team.vue";
 import Imprint from "../views/Imprint.vue";
 import Login from "../views/Login.vue";
 import Bots from "../views/Bots.vue"
+import Chat from "../views/Chat.vue"
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,10 @@ const routes = [
   {
     path: "/bots/:id",
     component: Bots
+  },
+  {
+    path: "/chat",
+    component: Chat
   }
 ];
 
