@@ -30,7 +30,7 @@
       v-if="isClicked"
     >
       <div class="hero-body">
-        <div class="container has-text-centered">
+        <div class="container has-text-centered has-text-white">
           <ol class="is-family-primary is-size-1 p-6 ">
             <router-link to="/" tag="li" active-class="active" exact
               >Projekt</router-link

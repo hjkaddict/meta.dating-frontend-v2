@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="hero is-fullheight is-warning">
+    <div class="hero is-fullheight">
       <div class="hero-head">
         <Nav />
       </div>
@@ -10,9 +10,7 @@
       </div>
 
       <div class="hero-foot has-background-primary">
-        <div class="container has-text-centered">
-          chat contrl panel goes here
-        </div>
+        <ChatControlpanel />
       </div>
     </div>
   </section>
@@ -20,10 +18,12 @@
 <script>
 import Nav from "@/components/Nav/Nav";
 import ChatContainer from "@/components/Chat/ChatContainer";
+import ChatControlpanel from "@/components/Chat/ChatControlpanel";
 export default {
   components: {
     Nav,
     ChatContainer,
+    ChatControlpanel,
   },
 };
 </script>
@@ -38,10 +38,6 @@ export default {
   position: fixed;
   width: 100vw;
   bottom: 0;
-  border: 1px solid red;
   height: 10vh;
-}
-.aa {
-  height: 100vh;
 }
 </style>
