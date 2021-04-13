@@ -3,11 +3,22 @@
     class="is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-background-dark has-text-left p-2"
   >
     <meta-tag
-      v-for="(value, key) in metadata"
+      v-for="(value, key) in this.metadata"
       :key="key"
       :title="key"
       :addon="value"
     ></meta-tag>
+    <div>
+      <figure class="image is-128x128 is-border">
+        <img
+          :src="
+            require(`@/assets/img/profilepictures/${extractProfileUrl(
+              this.metadata.profilepics
+            )}`)
+          "
+        />
+      </figure>
+    </div>
     <div>
       {{ this.metadata.description }}
     </div>
@@ -67,12 +78,25 @@ export default {
       if (this.chosenBots.length === 2 && filtered.length === 0) return true;
       else return false;
     },
+
+    extractProfileUrl(url) {
+      var filename = url.substring(url.lastIndexOf("/") + 1);
+      return filename;
+    },
   },
 
   data() {
     return {
       choose: this.metadata.isChosen,
+      thisProfileUrl: this.metadata.profilepics,
     };
   },
 };
 </script>
+
+<style>
+.is-border {
+  border: 1px solid #f64c72
+}
+  
+</style>

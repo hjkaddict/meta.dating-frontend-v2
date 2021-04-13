@@ -4,8 +4,6 @@
       <span class="tag is-link has-text-primary">{{ title }}</span>
       <span class="tag is-primary has-text-white">{{ addon }}</span>
     </div>
-
-    <div>{{ this.title.desription }}</div>
   </section>
 </template>
 
@@ -17,7 +15,12 @@ export default {
 
   methods: {
     filterData() {
-      return (this.title === "description" || this.title === 'id' || this.title ==='isChosen') ? false : true
+      return this.title === "description" ||
+        this.title === "id" ||
+        this.title === "isChosen" ||
+        this.title === "profilepics"
+        ? false
+        : true;
     },
   },
 };

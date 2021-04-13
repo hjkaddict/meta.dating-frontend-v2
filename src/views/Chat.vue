@@ -5,11 +5,11 @@
         <Nav />
       </div>
 
-      <div class="hero-body">
+      <div class="hero-body has-background-primary">
         <ChatContainer />
       </div>
 
-      <div class="hero-foot">
+      <div class="hero-foot has-background-primary">
         <div class="container has-text-centered">
           chat contrl panel goes here
         </div>
