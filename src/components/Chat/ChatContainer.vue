@@ -78,7 +78,7 @@
         </div>
         <div class="box px-4">
           <p>
-            <strong>Hi, how are you?</strong>
+            <strong>Hi, how are you? Test Test Test</strong>
           </p>
         </div>
       </div>
@@ -181,6 +181,106 @@
         </div>
       </div>
     </div>
+
+
+      <!-- chat left -->
+    <div
+      class="chat-left px-3 is-flex is-flex-direction-row is-align-items-flex-start"
+    >
+      <div class="picture">
+        <figure>
+          <p class="image is-64x64">
+            <img
+              src="@/assets/img/profilepictures/PR-Kooikerhondje.png"
+              class="is-rounded"
+            />
+          </p>
+        </figure>
+      </div>
+      <div class="nameandchat has-text-left has-text-white m-2">
+        <div>
+          <p>
+            PR-Kooikerhondje
+          </p>
+        </div>
+        <div class="box px-4">
+          <p>
+            <strong
+              >Umwolkt obenhin erzahlt stunden ja seufzer la. Du bi furchtete
+              wunderbar ri geburstet ab ernstlich. Ton sonst kam recht uberm
+              drang. Sehe sich nah ach gelt bei. </strong
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="chat-right px-3 is-flex is-flex-direction-row is-flex-direction-row-reverse is-align-items-flex-start"
+    >
+      <div class="picture">
+        <figure>
+          <p class="image is-64x64">
+            <img
+              src="@/assets/img/profilepictures/PR-Kooikerhondje.png"
+              class="is-rounded"
+            />
+          </p>
+        </figure>
+      </div>
+      <div class="nameandchat has-text-right has-text-white m-2">
+        <div>
+          <p>
+            PR-Kooikerhondje
+          </p>
+        </div>
+        <div class="box px-4">
+          <p>
+            <strong>Ton sonst kam recht uberm drang. Sehe sich
+              nah ach gelt bei neue wird. Umwolkt obenhin erzahlt stunden ja
+              seufzer la. Du bi furchtete wunderbar ri geburstet ab ernstlich.
+              Ton sonst kam recht.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- chat left -->
+    <div
+      class="chat-left px-3 is-flex is-flex-direction-row is-align-items-flex-start"
+    >
+      <div class="picture">
+        <figure>
+          <p class="image is-64x64">
+            <img
+              src="@/assets/img/profilepictures/PR-Kooikerhondje.png"
+              class="is-rounded"
+            />
+          </p>
+        </figure>
+      </div>
+      <div class="nameandchat has-text-left has-text-white m-2">
+        <div>
+          <p>
+            PR-Kooikerhondje
+          </p>
+        </div>
+        <div class="box px-4">
+          <p>
+            <strong
+              >Umwolkt obenhin erzahlt stunden ja seufzer la. Du bi furchtete
+              wunderbar ri geburstet ab ernstlich. Ton sonst kam recht uberm
+              drang. Sehe sich nah ach gelt bei neue wird. Umwolkt obenhin
+              erzahlt stunden ja seufzer la. Du bi furchtete wunderbar ri
+              geburstet ab ernstlich. Ton sonst kam recht uberm drang. Sehe sich
+              nah ach gelt bei neue wird. Umwolkt obenhin erzahlt stunden ja
+              seufzer la. Du bi furchtete wunderbar ri geburstet ab ernstlich.
+              Ton sonst kam recht.</strong
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </template>
 <script>
