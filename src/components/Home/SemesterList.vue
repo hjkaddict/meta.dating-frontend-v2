@@ -13,8 +13,8 @@
                 :key="semester.id"
                 :semester="semester"
                 :selection="selected == semester.id"
-                @this-semester="emitSemester"
                 @click.native="selected = semester.id"
+                @this-semester="emitSemester"
               >
               </Semester>
             </ol>
@@ -43,8 +43,12 @@ export default {
           term: "wintersemester2020-21",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
-          mitarbeiter: ["Alexej Bormatenkow", "Dominikus Muncha"],
-          tutor: "Hyungjoong Kim",
+          mitarbeiter: [
+            "Alexej Bormatenkow",
+            "Dominikus Muncha",
+            "Daniel Franke",
+          ],
+          tutor: ["Hyungjoong Kim"],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },
@@ -54,6 +58,11 @@ export default {
           term: "sommersemester2020",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
+          mitarbeiter: [
+            "Alexej Bormatenkow",
+            "Dominikus Muncha",
+            "Daniel Franke",
+          ],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },
@@ -63,8 +72,12 @@ export default {
           term: "wintersemester2019-20",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
-          mitarbeiter: ["Alexej Bormatenkow", "Dominikus Muncha"],
-          tutor: "Hyungjoong Kim",
+          mitarbeiter: [
+            "Alexej Bormatenkow",
+            "Dominikus Muncha",
+            "Daniel Franke",
+          ],
+          tutor: ["Hyungjoong Kim"],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },
@@ -74,8 +87,12 @@ export default {
           term: "sommersemester2019",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
-          mitarbeiter: ["Alexej Bormatenkow", "Daniel Franke"],
-          tutor: "Hyungjoong Kim",
+          mitarbeiter: [
+            "Alexej Bormatenkow",
+            "Dominikus Muncha",
+            "Daniel Franke",
+          ],
+          tutor: ["Hyungjoong Kim"],
           description:
             "1111Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },
@@ -85,8 +102,12 @@ export default {
           term: "wintersemester2018-19",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
-          mitarbeiter: ["Dominikus Muncha", "Daniel Franke"],
-          tutor: "Hyungjoong Kim",
+          mitarbeiter: [
+            "Alexej Bormatenkow",
+            "Dominikus Muncha",
+            "Daniel Franke",
+          ],
+          tutor: ["Hyungjoong Kim"],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },
@@ -96,8 +117,8 @@ export default {
           term: "sommersemester2018",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
-          mitarbeiter: ["Alexej Bormatenkow", "Daniel Franke"],
-          tutor: "Hyungjoong Kim",
+          mitarbeiter: ["Alexej Bormatenkow", "Dominikus Muncha", "Daniel Franke"],
+          tutor: ["Hyungjoong Kim"],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },

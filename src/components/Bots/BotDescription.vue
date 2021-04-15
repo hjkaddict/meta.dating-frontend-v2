@@ -1,6 +1,7 @@
 <template>
   <section
-    class="is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-background-dark has-text-left p-2"
+    class="p-5 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-background-dark has-text-left"
+    v-if="metadata"
   >
     <meta-tag
       v-for="(value, key) in this.metadata"
@@ -96,7 +97,6 @@ export default {
 
 <style>
 .is-border {
-  border: 1px solid #f64c72
+  border: 1px solid #f64c72;
 }
-  
 </style>

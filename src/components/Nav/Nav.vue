@@ -1,34 +1,36 @@
 <template>
   <section>
     <nav class="navbar is-fixed-top is-transparent level is-mobile p-5">
-      <!-- Left side: Back Button (not appears on Home view-->
+      <!-- Left side: Back Button (not appears on Home view)-->
       <div class="level-left">
-        <div class="level-item">
-          <font-awesome-icon
-            icon="arrow-left"
-            size="3x"
-            :style="{ color: '#f64c72' }"
-          ></font-awesome-icon>
+        <div
+          class="level-item"
+          v-if="this.$router.history.current.path !== '/'"
+        >
+          <BackButton />
         </div>
       </div>
 
       <!-- Right side: Burger Menu always appears on every view-->
       <div class="level-right">
         <div @click="openNavList()">
-          <div id="nav-icon" :class="{ open: isClicked }">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+          <div
+            id="nav-icon"
+            :class="{ open: isClicked }"
+            @mouseover="isHover = true"
+            @mouseleave="isHover = false"
+          >
+            <span
+              :class="{ 'has-background-link': isClicked || isHover }"
+              v-for="a in 4"
+              :key="a.id"
+            ></span>
           </div>
         </div>
       </div>
     </nav>
 
-    <div
-      class="nav-list has-background-dark hero"
-      v-if="isClicked"
-    >
+    <div class="nav-list has-background-dark hero" v-if="isClicked">
       <div class="hero-body">
         <div class="container has-text-centered has-text-white">
           <ol class="is-family-primary is-size-1 p-6 ">
@@ -52,10 +54,15 @@
 </template>
 
 <script>
+import BackButton from "@/components/Nav/BackButton";
 export default {
+  components: {
+    BackButton,
+  },
   data() {
     return {
       isClicked: false,
+      isHover: false,
     };
   },
   methods: {
@@ -66,7 +73,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .nav-list {
   position: fixed;
   width: 100vw;
@@ -109,7 +116,8 @@ li:hover {
   position: absolute;
   height: 6px;
   width: 100%;
-  background: #f64c72;
+  background: white;
+  /* background:  #f64c72; */
 
   opacity: 1;
   left: 0;

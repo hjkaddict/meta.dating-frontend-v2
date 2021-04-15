@@ -1,9 +1,12 @@
 <template>
   <section>
     <div class="bot">
-      <li class="is-clickable" 
-      :class="{ chosen: checkChosen() }" @click="emitId()">
-        <p class="pr-2">{{ bot.name }}</p>
+      <li
+        class="is-clickable"
+        :class="{ chosen: this.bot.isChosen }"
+        @click="emitId()"
+      >
+        <p class="pr-5">{{ bot.name }}</p>
       </li>
     </div>
 
@@ -51,6 +54,15 @@ export default {
 }
 
 .chosen {
-  border: 1px solid red;
+  border: solid #f64c72;
+  border-width: 1px 0px 1px 40px;
+  color: #f64c72;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .chosen {
+    border-width: 1px 1px 1px 20px;
+  }
 }
 </style>

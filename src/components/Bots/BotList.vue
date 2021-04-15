@@ -2,12 +2,12 @@
   <section
     class="p-0 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end has-text-right"
   >
-    <div class="content has-text-link pr-2">
+    <div class="content has-text-link pr-5">
       <p class="is-size-4 p-0 m-0">{{ this.botlist.title }}</p>
       <p class="is-size-6 p-0 m-0">{{ this.botlist.term }}</p>
     </div>
 
-    <ol class="is-fullwidth pl-2">
+    <ol class="is-fullwidth">
       <bot
         class="my-2"
         v-for="bot in this.botlist.bots"
@@ -51,9 +51,16 @@ export default {
 </script>
 <style scoped>
 .is-fullwidth {
-  width: 100%;
+  width: 90%;
 }
 .chosen {
   border: 1px solid red;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .is-fullwidth {
+    width: 100%;
+  }
 }
 </style>

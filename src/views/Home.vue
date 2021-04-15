@@ -4,7 +4,9 @@
       <div class="hero-head">
         <Nav />
       </div>
+      <!-- create blank DOM for mobile heading space  -->
       <div class="blank is-hidden-desktop"></div>
+
       <div class="hero-body">
         <project-container></project-container>
       </div>
