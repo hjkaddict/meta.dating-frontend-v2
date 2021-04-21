@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button is-link is-outlined is-medium"
+    class="button is-link is-outlined is-normal"
     :disabled="disabled"
     :class="{ 'is-focused': focus }"
   >

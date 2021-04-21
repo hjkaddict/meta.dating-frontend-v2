@@ -3,8 +3,10 @@
     <div class="bot">
       <li
         class="is-clickable"
-        :class="{ chosen: this.bot.isChosen }"
         @click="emitId()"
+        @mouseover="isHover = true"
+        @mouseleave="isHover = false"
+        :class="{ chosen: this.bot.isChosen, 'has-text-link': isHover }"
       >
         <p class="pr-5">{{ bot.name }}</p>
       </li>
@@ -42,6 +44,7 @@ export default {
   data() {
     return {
       select: false,
+      isHover: false
     };
   },
 };

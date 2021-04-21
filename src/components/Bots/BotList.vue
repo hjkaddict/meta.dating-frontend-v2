@@ -9,7 +9,7 @@
 
     <ol class="is-fullwidth">
       <bot
-        class="my-2"
+        class="my-2 border-transparent"
         v-for="bot in this.botlist.bots"
         :key="bot.id"
         :bot="bot"
@@ -17,7 +17,7 @@
         @emit-chosen="emitBus"
         :chosenBots="chosenBots"
         :class="{
-          'has-background-link':
+          'has-background-dark has-text-link' :
             !isMobile() && bot.id == selected && bot.isChosen == false,
         }"
         @click.native="selected = bot.id"
@@ -50,11 +50,12 @@ export default {
 };
 </script>
 <style scoped>
+.border-transparent {
+  /* border: 1px solid yellow; */
+}
+
 .is-fullwidth {
   width: 90%;
-}
-.chosen {
-  border: 1px solid red;
 }
 
 @media only screen and (max-width: 768px) {

@@ -1,7 +1,3 @@
-- Add pic/description tag on Bot Description 
-- Hover on bot list
-- Design new Select/Deselect Button
-
 
 
 - Back button from Bots view (it should not going back to landing page but each semester) :

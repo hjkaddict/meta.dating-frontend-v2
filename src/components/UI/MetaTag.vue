@@ -1,13 +1,21 @@
 <template>
   <section class="is-family-secondary">
-    <div class="tags has-addons mb-3" v-if="filterData()">
-      <span class="tag is-link has-text-primary m-0">{{ title }}</span>
-      <span
+    <div
+      class="tags has-addons mb-3"
+      v-if="filterData()"
+    >
+      <div class="tag is-link has-text-primary m-0">{{ title }}</div>
+
+      <div
         v-for="a in returnAddon"
         :key="a.id"
         class="tag is-primary has-text-white m-0"
-        >{{ a }}</span
       >
+        {{ a }}
+        
+      </div>
+      
+
     </div>
   </section>
 </template>
@@ -39,7 +47,7 @@ export default {
       return this.title === "description" ||
         this.title === "id" ||
         this.title === "isChosen" ||
-        this.title === "profilepics"
+        this.title === "image"
         ? false
         : true;
     },

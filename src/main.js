@@ -7,13 +7,19 @@ Vue.config.productionTip = false;
 
 // register font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faArrowLeft, faDownload, faBackward, faPlay, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faDownload,
+  faBackward,
+  faPlay,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faArrowLeft, faDownload, faBackward, faPlay, faInfoCircle);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
-// register global function by mixin 
+// register global function by mixin
 Vue.mixin({
   methods: {
     isMobile() {
@@ -30,7 +36,9 @@ Vue.mixin({
   },
 });
 
-
+//register pretty-checkbox
+import PrettyCheck from "pretty-checkbox-vue/check";
+Vue.component("p-check", PrettyCheck);
 
 new Vue({
   router,
