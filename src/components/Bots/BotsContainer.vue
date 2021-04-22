@@ -208,6 +208,6 @@ export default {
   height: 8vh;
   bottom: 0;
   width: 100vw;
-  z-index: 2;
+  z-index: 0;
 }
 </style>

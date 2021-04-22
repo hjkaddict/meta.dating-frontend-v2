@@ -33,6 +33,7 @@ export default {
 </script>
 
 <style scoped>
+
 .blank {
   height: 60px;
 }

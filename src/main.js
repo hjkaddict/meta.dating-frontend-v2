@@ -13,10 +13,24 @@ import {
   faBackward,
   faPlay,
   faInfoCircle,
+  faPlusCircle,
+  faChevronCircleDown,
+  faTrash,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faArrowLeft, faDownload, faBackward, faPlay, faInfoCircle);
+library.add(
+  faArrowLeft,
+  faDownload,
+  faBackward,
+  faPlay,
+  faInfoCircle,
+  faPlusCircle,
+  faChevronCircleDown,
+  faTrash,
+  faEdit
+);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // register global function by mixin

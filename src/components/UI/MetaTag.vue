@@ -1,9 +1,6 @@
 <template>
   <section class="is-family-secondary">
-    <div
-      class="tags has-addons mb-3"
-      v-if="filterData()"
-    >
+    <div class="tags has-addons ml-0 mr-1 mb-1" v-if="filterData()">
       <div class="tag is-link has-text-primary m-0">{{ title }}</div>
 
       <div
@@ -12,10 +9,7 @@
         class="tag is-primary has-text-white m-0"
       >
         {{ a }}
-        
       </div>
-      
-
     </div>
   </section>
 </template>

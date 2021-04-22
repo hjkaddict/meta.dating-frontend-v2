@@ -1,5 +1,11 @@
 <template>
-  <section class="hero p-5" :class="{ 'is-primary desktop-border': !isMobile(), 'is-dark mobile-border': isMobile()}">
+  <section
+    class="hero p-5"
+    :class="{
+      'is-primary desktop-border': !isMobile(),
+      'is-dark mobile-border': isMobile(),
+    }"
+  >
     <div class="hero-body">
       <div class="">
         <meta-tag

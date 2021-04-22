@@ -1,13 +1,16 @@
 <template>
   <section>
-    <nav class="navbar is-fixed-top is-transparent level is-mobile p-5">
-      <!-- Left side: Back Button (not appears on Home view)-->
+    <nav
+      class="navbar is-fixed-top level is-mobile p-5 has-text-white"
+      :class="{ 'has-background-black': isDashboard }"
+    >
+      <!-- Left side: Back Button (not appears on Home/Dashboard view)-->
       <div class="level-left">
-        <div
-          class="level-item"
-          v-if="this.$router.history.current.path !== '/'"
-        >
+        <div class="level-item" v-if="backButtonIsDisplayed">
           <BackButton />
+        </div>
+        <div class="level-item" v-if="isDashboard">
+          <p class="is-size-5">Bots</p>
         </div>
       </div>
 
@@ -30,10 +33,13 @@
       </div>
     </nav>
 
-    <div class="nav-list has-background-dark hero" v-if="isClicked">
+    <div
+      class="nav-list has-background-dark hero is-fullheight"
+      v-if="isClicked"
+    >
       <div class="hero-body">
         <div class="container has-text-centered has-text-white">
-          <ol class="is-family-primary is-size-1 p-6 ">
+          <ol class="is-family-primary is-size-2 p-3 ">
             <router-link to="/" tag="li" active-class="active" exact
               >Projekt</router-link
             >
@@ -43,7 +49,11 @@
             <router-link to="/imprint" tag="li" active-class="active"
               >Imprint</router-link
             >
-            <router-link to="login" tag="li" active-class="active"
+            <!-- this menu is only displayed when user logged in  -->
+            <router-link to="/dashboard" tag="li" active-class="active">
+              Dashboard</router-link
+            >
+            <router-link to="/login" tag="li" active-class="active"
               >Login</router-link
             >
           </ol>
@@ -58,6 +68,22 @@ import BackButton from "@/components/Nav/BackButton";
 export default {
   components: {
     BackButton,
+  },
+  computed: {
+    backButtonIsDisplayed() {
+      if (
+        this.$router.history.current.path === "/" ||
+        this.$router.history.current.path === "/dashboard"
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    isDashboard() {
+      if (this.$router.history.current.path === "/dashboard") return true;
+      else return false;
+    },
   },
   data() {
     return {
@@ -74,10 +100,14 @@ export default {
 </script>
 
 <style scoped>
+
+.navbar {
+ height: 90px;
+}
+
 .nav-list {
   position: fixed;
   width: 100vw;
-  height: 100vh;
   z-index: 1;
 }
 
@@ -109,6 +139,7 @@ li:hover {
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   cursor: pointer;
+  z-index: 99;
 }
 
 #nav-icon span {
@@ -132,16 +163,16 @@ li:hover {
 }
 
 #nav-icon span:nth-child(1) {
-  top: 0px;
+  top: 5px;
 }
 
 #nav-icon span:nth-child(2),
 #nav-icon span:nth-child(3) {
-  top: 14px;
+  top: 19px;
 }
 
 #nav-icon span:nth-child(4) {
-  top: 28px;
+  top: 33px;
 }
 
 #nav-icon.open span:nth-child(1) {

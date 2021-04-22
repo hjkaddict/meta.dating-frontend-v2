@@ -5,8 +5,10 @@ import Home from "../views/Home.vue";
 import Team from "../views/Team.vue";
 import Imprint from "../views/Imprint.vue";
 import Login from "../views/Login.vue";
+import Dashboard from "../views/Dashboard.vue"
 import Bots from "../views/Bots.vue"
 import Chat from "../views/Chat.vue"
+
 
 Vue.use(VueRouter);
 
@@ -34,7 +36,12 @@ const routes = [
   {
     path: "/chat",
     component: Chat
+  },
+  {
+    path: "/dashboard",
+    component: Dashboard
   }
+
 ];
 
 const router = new VueRouter({

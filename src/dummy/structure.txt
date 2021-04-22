@@ -103,6 +103,17 @@ Chat [view] // with one bot
 
 
 
+Dashboard [view]
+
+  - Nav [component]
+  - DashboardContainer
+    -- DashboardHeader
+      --- number of bots
+      --- account [component]
+      --- filterbots (später)
+
+    -- DashboardBotsContainer [component]
+      --- AddedBot [component]  
 
 
 team [view]
@@ -110,3 +121,4 @@ team [view]
 imprint [view]
 
 login [view]
+
