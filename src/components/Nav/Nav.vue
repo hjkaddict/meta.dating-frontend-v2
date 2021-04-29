@@ -73,7 +73,8 @@ export default {
     backButtonIsDisplayed() {
       if (
         this.$router.history.current.path === "/" ||
-        this.$router.history.current.path === "/dashboard"
+        this.$router.history.current.path === "/dashboard" ||
+        this.$router.history.current.path === "/addbot"
       ) {
         return false;
       } else {
@@ -81,7 +82,11 @@ export default {
       }
     },
     isDashboard() {
-      if (this.$router.history.current.path === "/dashboard") return true;
+      if (
+        this.$router.history.current.path === "/dashboard" ||
+        this.$router.history.current.path === "/addbot"
+      )
+        return true;
       else return false;
     },
   },
@@ -100,9 +105,8 @@ export default {
 </script>
 
 <style scoped>
-
 .navbar {
- height: 90px;
+  height: 90px;
 }
 
 .nav-list {

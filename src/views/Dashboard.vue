@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import Nav from "../components/Nav/Nav";
+import Nav from "@/components/Nav/Nav";
 import DashboardBotsContainer from "@/components/Dashboard/DashboardBotsContainer.vue";
 
 export default {
