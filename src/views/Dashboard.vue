@@ -43,6 +43,8 @@
         <DashboardBotsContainer />
       </div>
     </div>
+
+
   </section>
 </template>
 
@@ -55,7 +57,7 @@ export default {
     Nav,
     DashboardBotsContainer,
   },
-  methods: {},
+  
 };
 </script>
 

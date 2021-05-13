@@ -45,6 +45,14 @@ ol {
   list-style-type: none;
 }
 
+.b {
+  border: 1px solid red;
+}
+
+.blank {
+  height: 60px;
+}
+
 .navbar {
   &.is-transparent {
     background-color: transparent;

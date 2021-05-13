@@ -31,10 +31,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style scoped>
-
-.blank {
-  height: 60px;
-}
-</style>

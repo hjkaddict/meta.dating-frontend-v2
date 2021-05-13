@@ -15,8 +15,10 @@
           :class="{ 'has-text-link': hover && !isMobile() }"
           @click="selected"
         >
-          <h3 class="has-text-weight-bold is-size-5">{{ semester.title }}</h3>
-          <h4 class="is-size-6">{{ semester.term }}</h4>
+          <h3 class="has-text-weight-bold is-size-5">
+            {{ this.semester.title }}
+          </h3>
+          <h4 class="is-size-6">{{ this.semester.term }}</h4>
         </li>
       </div>
     </div>
@@ -38,7 +40,7 @@ export default {
     SemesterDescription,
   },
   props: ["semester", "selection"],
-  emits: ["this-semester"],
+  emits: ["this-semester-id"],
   data() {
     return {
       select: false,
@@ -47,12 +49,12 @@ export default {
   },
   methods: {
     selected() {
-      if (this.isMobile()) {
-        this.select = !this.select;
-      } else {
-        this.select = true;
-      }
-      if (this.select) this.$emit("this-semester", this.semester.id);
+      //close the project description tag when click again in mobile
+      if (this.isMobile()) this.select = !this.select;
+      else this.select = true;
+      
+      //emit semester.id to SemesterList 
+      if (this.select) this.$emit("this-semester-id", this.semester.id);
     },
   },
 };
@@ -74,10 +76,4 @@ export default {
   background: #082b9d;
   outline: 1px solid #082b9d;
 }
-
-/* @media only screen and (max-width: 768px) {
-  .selected {
-    border-width: 1px 1px 1px 20px;
-  }
-} */
 </style>

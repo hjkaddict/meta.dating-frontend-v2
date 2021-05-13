@@ -1,14 +1,17 @@
 <template>
   <section>
     <div class="hero is-fullheight is-dark">
+      <!-- navbar including burgermenu and back button  -->
       <div class="hero-head">
         <Nav />
       </div>
-      <!-- create blank DOM for mobile heading space  -->
+
+      <!-- create blank DOM for mobile heading space, blank class is defined in main.scss  -->
       <div class="blank is-hidden-desktop"></div>
 
+      <!-- project container  -->
       <div class="hero-body">
-        <project-container></project-container>
+        <ProjectContainer />
       </div>
     </div>
   </section>
@@ -26,9 +29,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style scoped>
-.blank {
-  height: 60px;
-}
-</style>

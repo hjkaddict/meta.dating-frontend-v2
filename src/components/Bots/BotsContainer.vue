@@ -1,23 +1,20 @@
 <template>
   <section>
     <div class="columns m-0" :class="{ 'p-5': isMobile() }">
+      <!-- botllist="semester" : sending semester as a prop to BotList -->
       <bot-list
         class="column is-one-third has-background-primary"
         :botlist="semester"
-        @this-bot="receivedId"
-        @emit-chosen="receiveChosen"
-        :chosenBots="chosenBots"
       ></bot-list>
-      
+
       <!-- Bot description component only for desktop -->
       <bot-description
         class="column is-two-thirds is-hidden-mobile hero is-fullheight"
         :metadata="selectedBot"
-        :chosenBots="chosenBots"
-        @emit-chosen="receiveChosen"
       ></bot-description>
     </div>
 
+    <!-- control panel which is always fixed at the bottom  -->
     <control-panel
       class="control-panel"
       :chosenBots="chosenBots"
@@ -29,6 +26,7 @@
 import BotList from "@/components/Bots/BotList";
 import BotDescription from "@/components/Bots/BotDescription";
 import ControlPanel from "@/components/Bots/ControlPanel";
+import { eventBus } from "@/main";
 
 export default {
   components: {
@@ -36,23 +34,32 @@ export default {
     BotDescription,
     ControlPanel,
   },
-  methods: {
-    receivedId(id) {
+  emits: ["chosen-bots", "emit-bot-description"],
+  created() {
+    // receive bot-id from Bot component, find bot by the id.
+    eventBus.$on("emit-bot-id", (id) => {
       const bot = this.semester.bots.find((bot) => bot.id == id);
       this.selectedBot = bot;
-    },
-    receiveChosen(choose, id) {
-      this.semester.bots.find((bot) => bot.id == id).isChosen = choose;
+
+      //then emit this founded bot to eventBus (for Bot description)
+      eventBus.$emit("emit-bot-description", bot);
+    });
+
+    // receive choosen bot's "id" and "isChosen" status from BotDescription component, change "isChosen" status of the bot in the list. Then filter the bots which have "isChosen == true" and save the bots as "chosenBots" variable
+    eventBus.$on("emit-chosen-status", (id, isChosen) => {
+      this.semester.bots.find((bot) => bot.id == id).isChosen = isChosen;
       const filteredBots = this.semester.bots.filter(
         (bot) => bot.isChosen === true
       );
       this.chosenBots = filteredBots;
-    },
+
+      eventBus.$emit("chosen-bots", this.chosenBots);
+    });
   },
+  methods: {},
 
   data() {
     return {
-      semesterId: this.$route.params.id,
       selectedBot: "",
       chosenBots: [],
       semester: {
@@ -199,9 +206,7 @@ export default {
 
 <style scoped>
 .columns {
-  /* border: 2px solid yellow; */
   width: 100vw;
-  /* max-width: 100%; */
 }
 .control-panel {
   position: fixed;

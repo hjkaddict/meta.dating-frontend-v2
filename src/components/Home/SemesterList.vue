@@ -3,20 +3,17 @@
     <div class="hero-body">
       <div class="container">
         <div class="level">
-          <div class="level-left"></div>
           <div class="level-right">
-            <!-- Click add class one on list and remove others -->
-            <!-- https://jsfiddle.net/Herteby/5amw1mfn/ -->
             <ol class="is-fullwidth">
-              <Semester
+              <semester
                 v-for="semester in semesters"
                 :key="semester.id"
                 :semester="semester"
-                :selection="selected == semester.id"
                 @click.native="selected = semester.id"
-                @this-semester="emitSemester"
+                :selection="selected == semester.id"
+                @this-semester-id="emitSemester"
               >
-              </Semester>
+              </semester>
             </ol>
           </div>
         </div>
@@ -32,7 +29,7 @@ export default {
   components: {
     Semester,
   },
-  emits: ["semester-info"],
+  emits: ["this-semester"],
   data() {
     return {
       selected: undefined,
@@ -117,7 +114,11 @@ export default {
           term: "sommersemester2018",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
-          mitarbeiter: ["Alexej Bormatenkow", "Dominikus Muncha", "Daniel Franke"],
+          mitarbeiter: [
+            "Alexej Bormatenkow",
+            "Dominikus Muncha",
+            "Daniel Franke",
+          ],
           tutor: ["Hyungjoong Kim"],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
@@ -127,11 +128,12 @@ export default {
   },
 
   methods: {
+    //find semester.id in this.semesters and emit to ProjectContainer
     emitSemester(id) {
       const selectedSemester = this.semesters.find(
         (semester) => semester.id === id
       );
-      this.$emit("semester-info", selectedSemester);
+      this.$emit("this-semester", selectedSemester);
     },
   },
 };

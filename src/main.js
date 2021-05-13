@@ -54,6 +54,9 @@ Vue.mixin({
 import PrettyCheck from "pretty-checkbox-vue/check";
 Vue.component("p-check", PrettyCheck);
 
+//eventBus
+export const eventBus = new Vue();
+
 new Vue({
   router,
   render: (h) => h(App),

@@ -16,6 +16,7 @@
                 icon="trash"
                 size="1x"
                 class="is-clickable"
+                @click="showModal"
               ></font-awesome-icon>
             </div>
             <div class="level-item">
@@ -67,18 +68,36 @@
           menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy
           eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur
           eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus
-
         </div>
       </div>
     </div>
+
+    <base-modal v-show="isModalVisible" @close="closeModal">
+      <template v-slot:modal-body>Are you sure you want to delete ? </template>
+    </base-modal>
   </section>
 </template>
 
 <script>
 import MetaTag from "@/components/UI/MetaTag";
+import BaseModal from "@/components/UI/BaseModal.vue";
 export default {
   components: {
     MetaTag,
+    BaseModal,
+  },
+  data() {
+    return {
+      isModalVisible: false,
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
@@ -99,6 +118,6 @@ export default {
 }
 
 .align-bottom {
-  align-self: flex-end; 
+  align-self: flex-end;
 }
 </style>

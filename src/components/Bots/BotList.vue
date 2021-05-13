@@ -13,11 +13,8 @@
         v-for="bot in this.botlist.bots"
         :key="bot.id"
         :bot="bot"
-        @this-id="thisbot"
-        @emit-chosen="emitBus"
-        :chosenBots="chosenBots"
         :class="{
-          'has-background-dark has-text-link' :
+          'has-background-dark has-text-link':
             !isMobile() && bot.id == selected && bot.isChosen == false,
         }"
         @click.native="selected = bot.id"
@@ -32,16 +29,7 @@ export default {
   components: {
     Bot,
   },
-  props: ["botlist", "chosenBots"],
-  emits: ["this-bot"],
-  methods: {
-    thisbot(id) {
-      this.$emit("this-bot", id);
-    },
-    emitBus(choose, id) {
-      this.$emit("emit-chosen", choose, id);
-    },
-  },
+  props: ["botlist"],
   data() {
     return {
       selected: undefined,
@@ -50,10 +38,6 @@ export default {
 };
 </script>
 <style scoped>
-.border-transparent {
-  /* border: 1px solid yellow; */
-}
-
 .is-fullwidth {
   width: 90%;
 }

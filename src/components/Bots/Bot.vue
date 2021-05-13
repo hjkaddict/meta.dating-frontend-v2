@@ -16,26 +16,22 @@
       class="is-hidden-tablet has-background-dark"
       v-if="select"
       :metadata="bot"
-      :chosenBots="chosenBots"
-      @emit-chosen="emitBus"
     ></bot-description>
   </section>
 </template>
 <script>
 import BotDescription from "@/components/Bots/BotDescription";
+import { eventBus } from "@/main";
 export default {
   components: {
     BotDescription,
   },
-  props: ["bot", "chosenBots"],
-  emits: ["this-id", "emit-chosen"],
+  props: ["bot"],
+  emits: ["emit-bot-id"],
   methods: {
     emitId() {
       this.select = !this.select;
-      this.$emit("this-id", this.bot.id);
-    },
-    emitBus(choose, id) {
-      this.$emit("emit-chosen", choose, id);
+      eventBus.$emit("emit-bot-id", this.bot.id);
     },
     checkChosen() {
       if (this.bot.isChosen === true) return true;
@@ -44,7 +40,7 @@ export default {
   data() {
     return {
       select: false,
-      isHover: false
+      isHover: false,
     };
   },
 };

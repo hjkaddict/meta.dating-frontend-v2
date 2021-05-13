@@ -1,19 +1,13 @@
+Until next meeting
 
-- create single 'chat' component which should be imported in chatcontainer
+1. organize overall codes
+  - vue tutorial - section 33 Handling User Input Forms
+
+2. dashboard children routes
 
 
-
-
-
-- Back button from Bots view (it should not going back to landing page but each semester) :
-https://forum.vuejs.org/t/dynamic-components-handling-browser-back-button/28232
-
-- study vuex and organize props/emits communication
 - Tablet breakpoint : smaller fonts but same layout as desktop
 
 
-
-- vue tutorials
--> Section 31 Advanced Component Usage
--> Section 33 Handling User Input Forms
-
+* to be fixed
+disable button problem during bot selection in mobile
