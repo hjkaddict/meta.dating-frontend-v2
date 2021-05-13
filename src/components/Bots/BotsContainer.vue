@@ -55,13 +55,20 @@ export default {
 
       eventBus.$emit("chosen-bots", this.chosenBots);
     });
+
+    eventBus.$on("increment-selected", (botId) => {
+      console.log(botId)
+    })
   },
-  methods: {},
+  methods: {
+
+  },
 
   data() {
     return {
+      chosenBots: { bots: [], conversation_id: this.$uuidv4() },
       selectedBot: "",
-      chosenBots: [],
+      // chosenBots: [],
       semester: {
         title: "AIOT#2 - Darkbot",
         term: "wintersemester2020-21",

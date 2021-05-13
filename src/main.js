@@ -5,6 +5,9 @@ require("@/assets/main.scss");
 
 Vue.config.productionTip = false;
 
+import { v4 as uuidv4 } from "uuid";
+Object.defineProperty(Vue.prototype, "$uuidv4", { value: uuidv4 });
+
 // register font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -56,6 +59,8 @@ Vue.component("p-check", PrettyCheck);
 
 //eventBus
 export const eventBus = new Vue();
+
+
 
 new Vue({
   router,

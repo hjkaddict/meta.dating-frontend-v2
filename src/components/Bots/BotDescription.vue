@@ -78,7 +78,7 @@ export default {
     };
   },
   props: ['metadata'],
-  emits: ["emit-chosen"],
+  emits: ["emit-chosen", "increment-selected", "decrement-selected"],
   created() {
     eventBus.$on("chosen-bots", (bots) => {
       this.chosenBots = bots;
@@ -96,9 +96,11 @@ export default {
   methods: {
     addBot() {
       eventBus.$emit("emit-chosen-status", this.metadata.id, true);
+      eventBus.$emit("increment-selected", this.metadata.id)
     },
     removeBot() {
       eventBus.$emit("emit-chosen-status", this.metadata.id, false);
+      eventBus.$emit("decrement-selected", this.metadata.id)
     },
 
     extractProfileUrl(url) {
