@@ -6,7 +6,7 @@
         @click="emitId()"
         @mouseover="isHover = true"
         @mouseleave="isHover = false"
-        :class="{ chosen: this.bot.isChosen, 'has-text-link': isHover }"
+        :class="{'has-text-link': isHover }"
       >
         <p class="pr-5">{{ bot.name }}</p>
       </li>
@@ -27,14 +27,12 @@ export default {
     BotDescription,
   },
   props: ["bot"],
-  emits: ["emit-bot-id"],
+  emits: ["emit-bot-name"],
+
   methods: {
     emitId() {
       this.select = !this.select;
-      eventBus.$emit("emit-bot-id", this.bot.id);
-    },
-    checkChosen() {
-      if (this.bot.isChosen === true) return true;
+      eventBus.$emit("emit-bot-name", this.bot.name);
     },
   },
   data() {

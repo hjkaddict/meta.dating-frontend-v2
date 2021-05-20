@@ -6,10 +6,10 @@
       </div>
 
       <div class="hero-body has-background-primary">
-        <ChatContainer />
+        <ChatContainer :messages="this.messages" />
       </div>
 
-      <div class="hero-foot has-background-primary">
+      <div class="hero-foot has-background-primary has-text-white">
         <ChatControlpanel />
       </div>
     </div>
@@ -24,6 +24,51 @@ export default {
     Nav,
     ChatContainer,
     ChatControlpanel,
+  },
+  props: {
+    routed: Boolean,
+  },
+  data() {
+    return {
+      room_id: "",
+      direct: !this.routed,
+      botQuery: this.$route.params.base64,
+      messages: [],
+    };
+  },
+  sockets: {
+    connect() {
+      console.log("socket connected");
+    },
+
+    message(message) {
+      // save to messages[] and it will get pushed down to MessagesContainer
+      this.messages.push(message);
+      // console.log(message);
+    },
+  },
+
+  async created() {
+    if (this.direct) {
+      // on refresh with provided link we should create a new conversation id and send a new request to server
+
+      const decodedBotQuery = JSON.parse(atob(this.botQuery));
+      this.room_id = this.$uuidv4();
+      decodedBotQuery.conversation_id = this.room_id;
+      console.log(
+        "new conversation_id on refresh: " + decodedBotQuery.conversation_id
+      );
+      const refreshedBotQuery = btoa(JSON.stringify(decodedBotQuery));
+      this.$socket.client.emit("room", this.room_id);
+      const queryURL = "http://metathema.net/api/chat/" + refreshedBotQuery;
+      const response = await fetch(queryURL);
+      const data = await response.json();
+      console.log(data);
+    }
+  },
+  beforeDestroy() {
+    // disconnect socket in order to stop recursive function on server
+    this.$socket.client.disconnect();
   },
 };
 </script>

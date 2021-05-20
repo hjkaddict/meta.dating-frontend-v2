@@ -12,14 +12,18 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "core-js": "^3.6.5",
+    "js-base64": "^3.6.0",
     "pretty-checkbox-vue": "^1.1.9",
+    "socket.io-client": "^3.0.3",
+    "uuid": "^8.3.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.1"
+    "vue-router": "^3.5.1",
+    "vue-socket.io-extended": "^4.0.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-service": "^4.5.13",
     "babel-eslint": "^10.1.0",
     "bulma": "^0.9.2",
     "eslint": "^6.7.2",

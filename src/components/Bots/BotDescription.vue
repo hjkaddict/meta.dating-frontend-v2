@@ -18,13 +18,7 @@
 
     <div>
       <figure class="image is-128x128 is-border">
-        <img
-          :src="
-            require(`@/assets/img/profilepictures/${extractProfileUrl(
-              this.metadata.image
-            )}`)
-          "
-        />
+        <img :src="this.metadata.image_path" />
       </figure>
     </div>
 
@@ -77,7 +71,7 @@ export default {
       chosenBots: [],
     };
   },
-  props: ['metadata'],
+  props: ["metadata"],
   emits: ["emit-chosen", "increment-selected", "decrement-selected"],
   created() {
     eventBus.$on("chosen-bots", (bots) => {
@@ -86,26 +80,21 @@ export default {
   },
   computed: {
     disableButton() {
-      var filtered = this.chosenBots.filter(
-        (bot) => bot.id === this.metadata.id
+      var thisBotisChosen = this.chosenBots.some(
+        (bot) => bot.name === this.metadata.name
       );
-      if (this.chosenBots.length >= 2 && filtered.length === 0) return true;
+      if (this.chosenBots.length >= 2 || thisBotisChosen) return true;
       else return false;
     },
   },
   methods: {
     addBot() {
-      eventBus.$emit("emit-chosen-status", this.metadata.id, true);
-      eventBus.$emit("increment-selected"), this.metadata.id);
+      // eventBus.$emit("emit-chosen-status", this.metadata.id, true);
+      eventBus.$emit("increment-selected", this.metadata);
     },
     removeBot() {
-      eventBus.$emit("emit-chosen-status", this.metadata.id, false);
-      eventBus.$emit("dcrement-selected"), this.metadata.id);
-    },
-
-    extractProfileUrl(url) {
-      var filename = url.substring(url.lastIndexOf("/") + 1);
-      return filename;
+      // eventBus.$emit("emit-chosen-status", this.metadata.id, false);
+      eventBus.$emit("decrement-selected", this.metadata);
     },
   },
 };

@@ -40,7 +40,7 @@
       <div class="hero-body">
         <div class="container has-text-centered has-text-white">
           <ol class="is-family-primary is-size-2 p-3 ">
-            <router-link to="/" tag="li" active-class="active" exact
+            <router-link to="/projekt" tag="li" active-class="active"
               >Projekt</router-link
             >
             <router-link to="/team" tag="li" active-class="active"
@@ -72,7 +72,7 @@ export default {
   computed: {
     backButtonIsDisplayed() {
       if (
-        this.$router.history.current.path === "/" ||
+        this.$router.history.current.path === "/projekt" ||
         this.$router.history.current.path === "/dashboard" ||
         this.$router.history.current.path === "/addbot"
       ) {

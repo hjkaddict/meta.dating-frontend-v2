@@ -5,48 +5,46 @@
         class="columns m-0"
         :class="{ 'is-flex is-flex-direction-column-reverse': isMobile() }"
       >
-        <semester-list
+        <TermList
           class="column is-one-third"
           :class="{ 'p-5': isMobile() }"
-          @this-semester="storeSelectedSemester"
-        ></semester-list>
+          @this-term="storeSelectedTerm"
+        />
 
-        <project-overview
+        <ProjectOverview
           class="column"
-          :class="{ 'is-hidden-tablet': selectedSemester }"
-        ></project-overview>
-
-        <semester-description
+          :class="{ 'is-hidden-tablet': selecterdTerm }"
+        />
+        <TermDescription
           class="column is-hidden-mobile is-fullheight"
-          v-if="selectedSemester"
-          :metadata="selectedSemester"
-        ></semester-description>
-
+          v-if="selecterdTerm"
+          :metadata="selecterdTerm"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import SemesterList from "./SemesterList";
+import TermList from "@/components/Home/TermList";
 import ProjectOverview from "./ProjectOverview";
-import SemesterDescription from "./SemesterDescription";
+import TermDescription from "@/components/Home/TermDescription";
 
 export default {
   data() {
     return {
-      selectedSemester: null,
+      selecterdTerm: null,
     };
   },
   components: {
-    SemesterList,
+    TermList,
     ProjectOverview,
-    SemesterDescription,
+    TermDescription,
   },
   methods: {
-    //store the semester from SemesterList and save it as a variable. This variable will be sent to SemesterDescription as props.
-    storeSelectedSemester(semester) {
-      this.selectedSemester = semester;
+    //store the semester from TermList and save it as a variable. This variable will be sent to TermDescription as props.
+    storeSelectedTerm(term) {
+      this.selecterdTerm = term;
     },
   },
 };

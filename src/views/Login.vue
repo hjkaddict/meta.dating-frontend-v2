@@ -8,7 +8,10 @@
         <div class="container">
           <div class="columns is-centered p-5">
             <div class="column is-5-tablet is-4-desktop">
-              <form action="" class="box has-background-dark">
+              <form
+                class="box has-background-dark"
+                v-on:submit.prevent="loginSubmit"
+              >
                 <div class="field">
                   <label for="" class="label has-text-white">Email</label>
                   <div class="control">
@@ -17,6 +20,7 @@
                       placeholder="example@meta-dating.de"
                       class="input"
                       required
+                      v-model="credentials.username"
                     />
                   </div>
                 </div>
@@ -29,6 +33,7 @@
                       placeholder="password"
                       class="input"
                       required
+                      v-model="credentials.password"
                     />
                   </div>
                 </div>
@@ -40,11 +45,14 @@
                   </label>
                 </div>
 
-                <div class="field"></div>
+                <div class="field has-text-centered">
+                  <base-button
+                    buttonTitle="Login"
+                    class="a"
+                    type="submit"
+                  ></base-button>
+                </div>
               </form>
-              <div class="field has-text-centered">
-                <base-button buttonTitle="Login" class="a"></base-button>
-              </div>
             </div>
           </div>
         </div>
@@ -62,16 +70,47 @@ export default {
     Nav,
     BaseButton,
   },
+  data() {
+    return {
+      credentials: {},
+    };
+  },
+  methods: {
+    async loginSubmit() {
+      const request = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        cache: "default",
+        body: JSON.stringify(this.credentials),
+      };
+      fetch("http://metathema.net/api/users/login", request)
+        .then(async (res) => {
+          const token = await res.json();
+
+          // check for error response
+          if (!res.ok) {
+            // get error message from body or default to response status
+            const error = res.status;
+            return Promise.reject(error);
+          }
+
+          this.token = token;
+
+          localStorage.setItem("accessToken", token);
+          this.$router.push("dashboard");
+        })
+        .catch((error) => {
+          this.errorMessage = error;
+          console.error("There was an error!", error);
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .a {
   padding: 0px 100px;
-}
-
-.b {
-  border: 1px solid red;
 }
 </style>

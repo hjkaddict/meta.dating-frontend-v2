@@ -15,7 +15,22 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    redirect: "/projekt",
     component: Home,
+  },
+  {
+    path: "/projekt",
+    component: Home,
+  },
+  {
+    path: "/projekt/:id",
+    component: Bots,
+  },
+  {
+    path: "/projekt/:base64",
+    name: "chat",
+    component: Chat,
+    props: true,
   },
   {
     path: "/team",
@@ -29,13 +44,15 @@ const routes = [
     path: "/login",
     component: Login,
   },
-  {
-    path: "/bots/:id",
-    component: Bots,
-  },
+  // {
+  //   path: "/chat/:base64",
+  //   name: "chat",
+  //   component: Chat,
+  //   props: true,
+  // },
   {
     path: "/chat",
-    component: Chat,
+    redirect: "/",
   },
   {
     path: "/dashboard",

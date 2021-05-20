@@ -16,31 +16,31 @@
           @click="selected"
         >
           <h3 class="has-text-weight-bold is-size-5">
-            {{ this.semester.title }}
+            {{ this.term.topic }}
           </h3>
-          <h4 class="is-size-6">{{ this.semester.term }}</h4>
+          <h4 class="is-size-6">{{ this.term.term }}</h4>
         </li>
       </div>
     </div>
 
     <!-- Semester Descrption on mobile -->
-    <semester-description
+    <term-description
       class="is-hidden-tablet"
       v-if="select"
-      :metadata="this.semester"
-    ></semester-description>
+      :metadata="this.term"
+    ></term-description>
   </section>
 </template>
 
 <script>
-import SemesterDescription from "@/components/Home/SemesterDescription";
+import TermDescription from "@/components/Home/TermDescription";
 
 export default {
   components: {
-    SemesterDescription,
+    TermDescription,
   },
-  props: ["semester", "selection"],
-  emits: ["this-semester-id"],
+  props: ["term", "selection"],
+  emits: ["this-term-id"],
   data() {
     return {
       select: false,
@@ -52,9 +52,9 @@ export default {
       //close the project description tag when click again in mobile
       if (this.isMobile()) this.select = !this.select;
       else this.select = true;
-      
-      //emit semester.id to SemesterList 
-      if (this.select) this.$emit("this-semester-id", this.semester.id);
+
+      //emit semester.id to SemesterList
+      if (this.select) this.$emit("this-term-id", this.term.id);
     },
   },
 };

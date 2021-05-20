@@ -5,6 +5,16 @@ require("@/assets/main.scss");
 
 Vue.config.productionTip = false;
 
+//socket.io
+import VueSocketIOExt from "vue-socket.io-extended";
+import { io } from "socket.io-client";
+const socket = io("http://metathema.net");
+Vue.use(VueSocketIOExt, socket);
+
+// uuid
+import { v4 as uuidv4 } from "uuid";
+Object.defineProperty(Vue.prototype, "$uuidv4", { value: uuidv4 });
+
 // register font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {

@@ -5,15 +5,14 @@
         <div class="level">
           <div class="level-right">
             <ol class="is-fullwidth">
-              <semester
-                v-for="semester in semesters"
-                :key="semester.id"
-                :semester="semester"
-                @click.native="selected = semester.id"
-                :selection="selected == semester.id"
-                @this-semester-id="emitSemester"
-              >
-              </semester>
+              <Term
+                v-for="term in terms"
+                :key="term.id"
+                :term="term"
+                @click.native="selected = term.id"
+                :selection="selected == term.id"
+                @this-term-id="emitTermId"
+              />
             </ol>
           </div>
         </div>
@@ -23,21 +22,22 @@
 </template>
 
 <script>
-import Semester from "./Semester.vue";
+import Term from "@/components/Home/Term";
 
 export default {
   components: {
-    Semester,
+    Term,
   },
-  emits: ["this-semester"],
+  emits: ["this-term"],
   data() {
     return {
       selected: undefined,
-      semesters: [
+      terms: [
         {
           id: 0,
-          title: "AIOT#2 - Darkbot",
-          term: "wintersemester2020-21",
+          // topic: "AIOT2 - Darkbot",
+          topic: "AIOT2",
+          term: "wintersemester20-21",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
@@ -51,8 +51,9 @@ export default {
         },
         {
           id: 1,
-          title: "Artificial Intelligence X Internet of Things",
-          term: "sommersemester2020",
+          // topic: "Artificial Intelligence X Internet of Things",
+          topic: "AIOT",
+          term: "sommersemester20",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
@@ -60,13 +61,14 @@ export default {
             "Dominikus Muncha",
             "Daniel Franke",
           ],
+          tutor: ["Hyungjoong Kim"],
           description:
             "Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
         },
         {
           id: 2,
-          title: "Artificial Intelligence X Internet of Things",
-          term: "wintersemester2019-20",
+          topic: "Artificial Intelligence X Internet of Things",
+          term: "wintersemester19-20",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
@@ -80,8 +82,8 @@ export default {
         },
         {
           id: 3,
-          title: "BrandBotLove",
-          term: "sommersemester2019",
+          topic: "BrandBotLove",
+          term: "sommersemester19",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
@@ -95,8 +97,8 @@ export default {
         },
         {
           id: 4,
-          title: "BrandBotLove",
-          term: "wintersemester2018-19",
+          topic: "BrandBotLove",
+          term: "wintersemester18-19",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
@@ -110,8 +112,8 @@ export default {
         },
         {
           id: 5,
-          title: "BOTIFY!",
-          term: "sommersemester2018",
+          topic: "BOTIFY!",
+          term: "sommersemester18",
           platform: "Watson Assistant V2",
           lecturer: "Klaus Gasteier",
           mitarbeiter: [
@@ -129,11 +131,9 @@ export default {
 
   methods: {
     //find semester.id in this.semesters and emit to ProjectContainer
-    emitSemester(id) {
-      const selectedSemester = this.semesters.find(
-        (semester) => semester.id === id
-      );
-      this.$emit("this-semester", selectedSemester);
+    emitTermId(id) {
+      const selectedTerm = this.terms.find((term) => term.id === id);
+      this.$emit("this-term", selectedTerm);
     },
   },
 };

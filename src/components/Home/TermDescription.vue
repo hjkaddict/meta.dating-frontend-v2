@@ -26,10 +26,9 @@
             class="pt-5"
             :class="{ 'level-item': isMobile(), 'level-right': !isMobile() }"
           >
-          <!-- router-link should be changed  -->
-            <router-link :to="'/bots/' + this.metadata.id"
-              ><base-button :buttonTitle="'Zum Projekt'"></base-button
-            ></router-link>
+            <router-link :to="'/projekt/' + returnUrlParameter">
+              <base-button :buttonTitle="'Zum Projekt'"></base-button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -46,8 +45,12 @@ export default {
     MetaTag,
     BaseButton,
   },
-  props: ["metadata"],
-
+  props: ["metadata"], 
+  computed: {
+    returnUrlParameter() {
+      return this.metadata.topic.replace(/\s/g, ""); // remove whitespace from urlparameters
+    },
+  },
 };
 </script>
 

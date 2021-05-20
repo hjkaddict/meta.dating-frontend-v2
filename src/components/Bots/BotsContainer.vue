@@ -1,10 +1,10 @@
 <template>
   <section>
     <div class="columns m-0" :class="{ 'p-5': isMobile() }">
-      <!-- botllist="semester" : sending semester as a prop to BotList -->
+      <!-- botllist="botProfileData" : sending botProfileData as a prop to BotList -->
       <bot-list
         class="column is-one-third has-background-primary"
-        :botlist="semester"
+        :botlist="botProfileData"
       ></bot-list>
 
       <!-- Bot description component only for desktop -->
@@ -18,6 +18,7 @@
     <control-panel
       class="control-panel"
       :chosenBots="chosenBots"
+      :base64="chosenBotsBase64"
     ></control-panel>
   </section>
 </template>
@@ -35,170 +36,66 @@ export default {
     ControlPanel,
   },
   emits: ["chosen-bots", "emit-bot-description"],
-  created() {
+  async created() {
     // receive bot-id from Bot component, find bot by the id.
-    eventBus.$on("emit-bot-id", (id) => {
-      const bot = this.semester.bots.find((bot) => bot.id == id);
+    eventBus.$on("emit-bot-name", (name) => {
+      const bot = this.botProfileData.find((bot) => bot.name == name);
+
+      // console.log(bot)
       this.selectedBot = bot;
 
       //then emit this founded bot to eventBus (for Bot description)
       eventBus.$emit("emit-bot-description", bot);
     });
 
-    // receive choosen bot's "id" and "isChosen" status from BotDescription component, change "isChosen" status of the bot in the list. Then filter the bots which have "isChosen == true" and save the bots as "chosenBots" variable
-    eventBus.$on("emit-chosen-status", (id, isChosen) => {
-      this.semester.bots.find((bot) => bot.id == id).isChosen = isChosen;
-      const filteredBots = this.semester.bots.filter(
-        (bot) => bot.isChosen === true
-      );
-      this.chosenBots = filteredBots;
+    //fetching bots from backend
 
-      eventBus.$emit("chosen-bots", this.chosenBots);
+    const term = this.$router.currentRoute.params.id;
+
+    const response = await fetch("http://metathema.net/api/bots/term/" + term);
+    const data = await response.json();
+    this.botProfileData = data;
+
+    eventBus.$on("increment-selected", (profileData) => {
+      //the bot that user click "auswaelen"
+      let chosenBot = {
+        name: profileData.name,
+        service: profileData.service,
+        turn: this.botCounter,
+      };
+
+      this.chosenBots.bots.push(chosenBot);
+      this.toBase64();
+
+      eventBus.$emit("chosen-bots", this.chosenBots.bots);
+      this.botCounter = this.botCounter + 1;
+    });
+
+    eventBus.$on("decrement-selected", (profileData) => {
+      var index = this.chosenBots.bots.findIndex(
+        (bot) => bot.name == profileData.name
+      );
+      if (index == 0 || index == 1) this.chosenBots.bots.splice(index, 1);
+      this.toBase64();
+      this.botCounter = this.botCounter - 1;
+
+      eventBus.$emit("chosen-bots", this.chosenBots.bots);
     });
   },
-  methods: {},
+
+  methods: {
+    toBase64() {
+      this.chosenBotsBase64 = btoa(JSON.stringify(this.chosenBots));
+    },
+  },
 
   data() {
     return {
       selectedBot: "",
-      chosenBots: [],
-      semester: {
-        title: "AIOT#2 - Darkbot",
-        term: "wintersemester2020-21",
-
-        bots: [
-          {
-            id: 0,
-            name: "PR-Kooikerhondje",
-            gruppe: "Gruppe 1",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/PR-Kooikerhondje.png",
-            description:
-              "000Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-          {
-            id: 1,
-            name: "Die Klangschale",
-            gruppe: "Gruppe 2",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/DieKlangschale.jpeg",
-            description:
-              "111Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-          {
-            id: 2,
-            name: "Feuerzeug",
-            gruppe: "Gruppe 3",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/Feuerzeug.jpeg",
-            description:
-              "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-          {
-            id: 3,
-            name: "Siebtraeger",
-            gruppe: "Gruppe 4",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/Siebtraeger.jpeg",
-            description:
-              "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-          {
-            id: 4,
-            name: "Mauspad",
-            gruppe: "Gruppe 5",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/Mauspad.png",
-            description:
-              "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: ["Beringar Haas", "Sigmund Meier"],
-            isChosen: false,
-          },
-          {
-            id: 5,
-            name: "Melitta",
-            gruppe: "Gruppe 6",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/Melitta.webp",
-            description:
-              "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-          {
-            id: 6,
-            name: "Savage bibi",
-            gruppe: "Gruppe 7",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/SavageBibi.jpeg",
-            description:
-              "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-          {
-            id: 7,
-            name: "Uhrsula Richemont",
-            gruppe: "Gruppe 8",
-            platform: "Watson Assistant V2",
-            image: "@/assets/img/profilepics/UhrsulaRichemont.jpeg",
-            description:
-              "Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip menandri ad sea, doctus labitur explicari has ex.",
-            students: [
-              "Beringar Haas",
-              "Sigmund Meier",
-              "Elisabeth Werner",
-              "Nikolaus Stein",
-              "Kerstin Scholz",
-            ],
-            isChosen: false,
-          },
-        ],
-      },
+      botProfileData: null,
+      chosenBots: { bots: [], conversation_id: this.$uuidv4() },
+      botCounter: 0,
+      chosenBotsBase64: "",
     };
   },
 };

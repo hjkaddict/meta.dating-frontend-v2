@@ -38,10 +38,16 @@ export default {
   },
   methods: {
     filterData() {
-      return this.title === "description" ||
+      return this.title === "_id" ||
+      this.title === "assistant_id" ||
+      this.title === "date_created" ||
+      this.title === "apikey" ||
+      this.title === "isPublic" ||
+      this.title === "owner" || 
+      this.title === "__v" ||
+      this.title === "description" ||
         this.title === "id" ||
-        this.title === "isChosen" ||
-        this.title === "image"
+        this.title === "image_path"
         ? false
         : true;
     },

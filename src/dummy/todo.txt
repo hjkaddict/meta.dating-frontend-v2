@@ -1,12 +1,21 @@
-Until next meeting
+- login / dashboard api connection 
+  - login -> success -> redirect to dashboard show dashboard menu on Nav
+  - load bots from db to dashboard
+  - 'bot add' function
+  - 'bot edit' function
+  - 'bot delete' function 
 
-1. organize overall codes
-  - vue tutorial - section 33 Handling User Input Forms
-
-2. dashboard children routes
+* 'create account' function!!!
 
 
-- Tablet breakpoint : smaller fonts but same layout as desktop
+- database modification 
+  - add bot information
+
+- mobile design modification (weekend)
+
+- term description
+
+- team / imprint page design
 
 
 * to be fixed

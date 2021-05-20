@@ -2,50 +2,70 @@
   <section
     class="p-0 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end has-text-right"
   >
-    <div class="content has-text-link pr-5">
-      <p class="is-size-4 p-0 m-0">{{ this.botlist.title }}</p>
-      <p class="is-size-6 p-0 m-0">{{ this.botlist.term }}</p>
-    </div>
+    <!-- <div class="content has-text-link pr-5"> -->
+      <!-- <p class="is-size-4 p-0 m-0">{{ this.botlist.name }}</p> -->
+      <!-- <p class="is-size-6 p-0 m-0">{{ this.botlist.term }}</p> -->
+      <!-- {{this.botlist}} -->
+    <!-- </div> -->
 
     <ol class="is-fullwidth">
       <bot
         class="my-2 border-transparent"
-        v-for="bot in this.botlist.bots"
+        v-for="bot in this.botlist"
         :key="bot.id"
         :bot="bot"
         :class="{
           'has-background-dark has-text-link':
-            !isMobile() && bot.id == selected && bot.isChosen == false,
+            !isMobile() && bot.name == selected,
+          chosen: chosenBots.some((b) => b.name === bot.name),
         }"
-        @click.native="selected = bot.id"
+        @click.native="selected = bot.name"
       ></bot>
     </ol>
   </section>
 </template>
 <script>
 import Bot from "@/components/Bots/Bot";
+import { eventBus } from "@/main";
 
 export default {
   components: {
     Bot,
   },
   props: ["botlist"],
+  created() {
+    eventBus.$on("chosen-bots", (chosenBots) => {
+      this.chosenBots = chosenBots;
+    });
+  },
   data() {
     return {
       selected: undefined,
+      chosenBots: [],
     };
   },
 };
 </script>
+
 <style scoped>
 .is-fullwidth {
   width: 90%;
+}
+
+.chosen {
+  border: solid #f64c72;
+  border-width: 1px 0px 1px 40px;
+  color: #f64c72;
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .is-fullwidth {
     width: 100%;
+  }
+
+  .chosen {
+    border-width: 1px 1px 1px 20px;
   }
 }
 </style>
