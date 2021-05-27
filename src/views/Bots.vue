@@ -5,7 +5,7 @@
         <Nav />
       </div>
 
-      <div class="blank is-hidden-desktop"></div>
+      <div class="blank is-hidden-tablet"></div>
 
       <div
         class="hero-body"

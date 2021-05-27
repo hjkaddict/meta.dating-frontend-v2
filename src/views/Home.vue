@@ -7,7 +7,7 @@
       </div>
 
       <!-- create blank DOM for mobile heading space, blank class is defined in main.scss  -->
-      <div class="blank is-hidden-desktop"></div>
+      <div class="blank is-hidden-tablet"></div>
 
       <!-- project container  -->
       <div class="hero-body">

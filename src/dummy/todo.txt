@@ -1,11 +1,10 @@
 - login / dashboard api connection 
-  - login -> success -> redirect to dashboard show dashboard menu on Nav
-  - load bots from db to dashboard
-  - 'bot add' function
-  - 'bot edit' function
-  - 'bot delete' function 
 
-* 'create account' function!!!
+  - 'bot add' function *successfully added, but image size should be changed, do I need to keep using Filepond?
+
+  - loading bar between add/edit bot
+  - keep me login function
+
 
 
 - database modification 

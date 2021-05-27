@@ -87,7 +87,7 @@ export default {
       fetch("http://metathema.net/api/users/login", request)
         .then(async (res) => {
           const token = await res.json();
-
+          
           // check for error response
           if (!res.ok) {
             // get error message from body or default to response status

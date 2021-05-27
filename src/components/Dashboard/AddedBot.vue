@@ -1,14 +1,20 @@
 <template>
   <section>
-    <div class="container has-background-white has-text-black">
+    <div class="container has-background-white has-text-black p-2">
       <!-- first row -->
       <div class="section px-2 pt-2 pb-0">
         <div class="level is-mobile">
           <div class="level-left is-family-primary">
             <div class="level-item">
-              <p class="is-size-4">Die Klangschale</p>
+              <p class="is-size-4">{{ this.addedbot.name }}</p>
             </div>
-            <div class="level-item align-bottom"><p>Sichtbar</p></div>
+
+            <div
+              v-show="this.addedbot.isPublic"
+              class="level-item align-bottom has-text-danger"
+            >
+              <p>Sichtbar</p>
+            </div>
           </div>
           <div class="level-right">
             <div class="level-item">
@@ -24,6 +30,7 @@
                 icon="edit"
                 size="1x"
                 class="is-clickable"
+                @click="editBot()"
               ></font-awesome-icon>
             </div>
           </div>
@@ -35,45 +42,40 @@
           <div class="level-left"></div>
           <div class="level-right">
             <div class="level-item is-family-secondary is-size-7">
-              <p>bearbeitet: 2021-04-19 09:39:05</p>
+              <p>created: {{ this.addedbot.date_created }}</p>
             </div>
           </div>
         </div>
       </div>
       <!-- third row  -->
       <article class="media py-2">
-        <figure class="media-left pl-3 mr-1">
+        <figure class="media-left pl-3 mr-1 media-image">
           <p class="image is-128x128">
-            <img
-              src="@/assets/img/profilepictures/PR-Kooikerhondje.png"
-              class=""
-            />
+            <img :src="this.addedbot.image_path" class="" />
           </p>
         </figure>
-        <div class="media-content">
+        <div class="media-content px-2">
           <div class="content">
-            <meta-tag title="Platform" addon="Watson Assistant V2"> </meta-tag>
-            <meta-tag title="Term" addon="wintersemester20-21"> </meta-tag>
-            <meta-tag title="Gruppe" addon="3"> </meta-tag>
+            <MetaTag title="Platform" :addon="this.addedbot.service" />
+            <MetaTag title="Term" addon="null" />
+            <MetaTag title="Owner" :addon="this.addedbot.owner" />
           </div>
         </div>
       </article>
 
       <!-- fourth row  -->
-      <div class="section px-3 py-0 is-family-secondary is-size-6">
+      <div class="section px-3 py-1 is-family-secondary is-size-7">
         <div class="descriptionContainer">
-          000Vis nonumy eirmod an, maiorum scriptorem neglegentur cu vix. Et
-          velit gloriatur eam, cu viderer erroribus quo. Ius te audiam electram.
-          Tantas impetus numquam ut nam. Vim ut possim repudiare. Semper aliquip
-          menandri ad sea, doctus labitur explicari has ex. Vis etiam nonumy
-          eirmod an, maiorum scriptorem neglegentur cu vix. Et velit gloriatur
-          eam, cu viderer erroribus quo. Ius te audiam electram. Tantas impetus
+          {{ this.addedbot.description }}
         </div>
       </div>
     </div>
 
-    <base-modal v-show="isModalVisible" @close="closeModal">
-      <template v-slot:modal-body>Are you sure you want to delete ? </template>
+    <base-modal
+      v-show="isModalVisible"
+      @close="closeModal"
+      :addedbot="this.addedbot"
+    >
     </base-modal>
   </section>
 </template>
@@ -81,14 +83,18 @@
 <script>
 import MetaTag from "@/components/UI/MetaTag";
 import BaseModal from "@/components/UI/BaseModal.vue";
+
 export default {
   components: {
     MetaTag,
     BaseModal,
   },
+  props: ["addedbot"],
   data() {
     return {
       isModalVisible: false,
+      id: this.addedbot._id,
+      ProfileData: this.addedbot
     };
   },
   methods: {
@@ -98,15 +104,20 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
+    editBot() {
+      this.$router.replace({
+        name: "edit",
+        params: {
+          id: this.id,
+          ProfileData: this.ProfileData,
+        },
+      });
+    },
   },
 };
 </script>
 
 <style>
-.b {
-  border: 1px solid red;
-}
-
 .descriptionContainer {
   height: 100px;
   overflow: auto;
@@ -119,5 +130,9 @@ export default {
 
 .align-bottom {
   align-self: flex-end;
+}
+
+.media-image {
+  overflow: hidden;
 }
 </style>

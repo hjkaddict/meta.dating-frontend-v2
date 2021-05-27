@@ -50,11 +50,29 @@
               >Imprint</router-link
             >
             <!-- this menu is only displayed when user logged in  -->
-            <router-link to="/dashboard" tag="li" active-class="active">
+            <router-link
+              to="/dashboard"
+              v-if="isLoggedIn"
+              tag="li"
+              active-class="active"
+            >
               Dashboard</router-link
             >
-            <router-link to="/login" tag="li" active-class="active"
+
+            <router-link
+              to="/login"
+              v-if="!isLoggedIn"
+              tag="li"
+              active-class="active"
               >Login</router-link
+            >
+            <!-- this menu is only displayed when user logged in  -->
+            <router-link
+              to="/logout"
+              v-if="isLoggedIn"
+              tag="li"
+              active-class="active"
+              >Logout</router-link
             >
           </ol>
         </div>
@@ -72,9 +90,7 @@ export default {
   computed: {
     backButtonIsDisplayed() {
       if (
-        this.$router.history.current.path === "/projekt" ||
-        this.$router.history.current.path === "/dashboard" ||
-        this.$router.history.current.path === "/addbot"
+        this.$router.history.current.path === "/projekt" || this.isDashboard
       ) {
         return false;
       } else {
@@ -82,11 +98,11 @@ export default {
       }
     },
     isDashboard() {
-      if (
-        this.$router.history.current.path === "/dashboard" ||
-        this.$router.history.current.path === "/addbot"
-      )
-        return true;
+      if (this.$route.path.includes("/dashboard/")) return true;
+      else return false;
+    },
+    isLoggedIn() {
+      if (localStorage.getItem("accessToken")) return true;
       else return false;
     },
   },

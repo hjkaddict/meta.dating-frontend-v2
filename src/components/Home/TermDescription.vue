@@ -14,7 +14,9 @@
           :title="key"
           :addon="value"
         ></meta-tag>
-        <div>{{ metadata.description }}</div>
+        <div v-html="metadata.description">
+          {{ metadata.description }}
+        </div>
 
         <!-- Zum Projekt Button  -->
         <div class="level">
@@ -45,7 +47,7 @@ export default {
     MetaTag,
     BaseButton,
   },
-  props: ["metadata"], 
+  props: ["metadata"],
   computed: {
     returnUrlParameter() {
       return this.metadata.topic.replace(/\s/g, ""); // remove whitespace from urlparameters

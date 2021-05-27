@@ -1,14 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from "@/views/Home.vue";
-import Team from "@/views/Team.vue";
-import Imprint from "@/views/Imprint.vue";
-import Login from "@/views/Login.vue";
-import Dashboard from "@/views/Dashboard.vue";
-import Bots from "@/views/Bots.vue";
-import Chat from "@/views/Chat.vue";
-import Addbot from "@/views/Addbot.vue";
+import Home from "@/views/Home";
+import Team from "@/views/Team";
+import Imprint from "@/views/Imprint";
+import Login from "@/views/Login";
+import Dashboard from "@/views/Dashboard";
+import DashboardHome from "@/components/Dashboard/DashboardHome";
+import Bots from "@/views/Bots";
+import Chat from "@/views/Chat";
+import AddbotForm from "@/components/Dashboard/AddbotForm";
+import EditBot from "@/components/Dashboard/EditBotForm";
 
 Vue.use(VueRouter);
 
@@ -16,6 +18,7 @@ const routes = [
   {
     path: "/",
     redirect: "/projekt",
+    name: "home",
     component: Home,
   },
   {
@@ -42,25 +45,54 @@ const routes = [
   },
   {
     path: "/login",
+    name: "login",
     component: Login,
   },
-  // {
-  //   path: "/chat/:base64",
-  //   name: "chat",
-  //   component: Chat,
-  //   props: true,
-  // },
+  {
+    path: "/logout",
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("accessToken")) {
+        localStorage.removeItem("accessToken");
+        next({ name: "home" });
+      } else {
+        next();
+      }
+    },
+  },
   {
     path: "/chat",
     redirect: "/",
   },
   {
     path: "/dashboard",
+    name: "dashboard",
+    redirect: "/dashboard/home",
     component: Dashboard,
-  },
-  {
-    path: "/addbot",
-    component: Addbot,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("accessToken")) {
+        next("login");
+      } else {
+        next();
+      }
+    },
+
+    children: [
+      { path: "home", component: DashboardHome },
+      { path: "addbot", component: AddbotForm },
+      {
+        path: "edit/:id",
+        name: "edit",
+        component: EditBot,
+        props: true,
+        beforeRouteEnter: (to, from, next) => {
+          if (!localStorage.getItem("accessToken")) {
+            next("login");
+          } else {
+            next();
+          }
+        },
+      },
+    ],
   },
 ];
 
