@@ -5,7 +5,9 @@
         <Nav />
       </div>
       <div class="hero-body has-text-white">
-        Team
+        <div class="container has-text-centered">
+          Team (to be updated)
+        </div>
       </div>
     </div>
   </section>
@@ -21,6 +23,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

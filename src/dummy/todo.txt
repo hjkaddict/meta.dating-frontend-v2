@@ -1,11 +1,8 @@
 - login / dashboard api connection 
 
   - 'bot add' function *successfully added, but image size should be changed, do I need to keep using Filepond?
-
   - loading bar between add/edit bot
   - keep me login function
-
-
 
 - database modification 
   - add bot information
@@ -19,3 +16,25 @@
 
 * to be fixed
 disable button problem during bot selection in mobile
+
+
+
+Mongoose BotSchema:
+
+        Gruppe: {
+          type: Number,
+          required: true
+        },
+        Semester {
+          type: String,
+          required: true
+        },
+        Studierende: {
+          type: Object
+        },
+        Objekt : { // ex: Feuerzeug
+          type: Strng,
+          required: true
+        }
+
+
