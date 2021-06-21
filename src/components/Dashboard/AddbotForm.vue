@@ -26,12 +26,29 @@
           <div class="field-body">
             <div class="control">
               <div class="select">
-                <select disabled>
+                <select v-model="newBotEntry.semester">
                   <option>Sommersemester 21</option>
                   <option>Wintersemester 20-21</option>
                   <option>Sommersemester 20</option>
                   <option>Wintersemester 19-20</option>
                   <option>Sommersemester 19</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project term select -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Project *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <div class="select">
+                <select v-model="newBotEntry.term">
+                  <option>AIOT2</option>
+                  <option>AIOT</option>
                 </select>
               </div>
             </div>
@@ -47,7 +64,7 @@
             <div class="field is-grouped">
               <div class="control">
                 <div class="select">
-                  <select class="selectGroup" disabled>
+                  <select class="selectGroup" v-model="newBotEntry.group">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -267,6 +284,7 @@ export default {
       headers.append("Authorization", "Bearer " + token);
 
       let newBotEntry = JSON.stringify(this.newBotEntry);
+      console.log(newBotEntry);
       let formData = new FormData();
       formData.append("botEntry", newBotEntry);
 

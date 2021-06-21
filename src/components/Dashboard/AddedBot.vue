@@ -57,7 +57,8 @@
         <div class="media-content px-2">
           <div class="content">
             <MetaTag title="Platform" :addon="this.addedbot.service" />
-            <MetaTag title="Term" addon="null" />
+            <MetaTag title="Term" :addon="this.addedbot.term" />
+            <MetaTag title="Term" :addon="this.addedbot.semester" />
             <MetaTag title="Owner" :addon="this.addedbot.owner" />
           </div>
         </div>
