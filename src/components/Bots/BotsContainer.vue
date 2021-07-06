@@ -40,8 +40,6 @@ export default {
     // receive bot-id from Bot component, find bot by the id.
     eventBus.$on("emit-bot-name", (name) => {
       const bot = this.botProfileData.find((bot) => bot.name == name);
-
-      // console.log(bot)
       this.selectedBot = bot;
 
       //then emit this founded bot to eventBus (for Bot description)
@@ -52,7 +50,7 @@ export default {
 
     const term = this.$router.currentRoute.params.id;
 
-    const response = await fetch("http://metathema.net/api/bots/term/" + term);
+    const response = await fetch("http://www.metathema.net/api/bots/term/" + term);
     const data = await response.json();
     this.botProfileData = data;
 

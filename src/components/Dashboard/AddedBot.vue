@@ -58,8 +58,10 @@
           <div class="content">
             <MetaTag title="Platform" :addon="this.addedbot.service" />
             <MetaTag title="Term" :addon="this.addedbot.term" />
-            <MetaTag title="Term" :addon="this.addedbot.semester" />
-            <MetaTag title="Owner" :addon="this.addedbot.owner" />
+            <MetaTag title="Semester" :addon="this.addedbot.semester" />
+            <!-- <MetaTag title="Account" :addon="this.addedbot.owner" /> -->
+            <MetaTag title="Group" :addon="this.addedbot.group" />
+            
           </div>
         </div>
       </article>

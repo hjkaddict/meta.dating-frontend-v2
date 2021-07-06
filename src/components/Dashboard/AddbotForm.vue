@@ -56,15 +56,19 @@
         </div>
 
         <!-- group number select -->
-        <div class="field is-horizontal ">
+        <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <label class="label">Group</label>
+            <label class="label">Group *</label>
           </div>
           <div class="field-body">
             <div class="field is-grouped">
               <div class="control">
                 <div class="select">
-                  <select class="selectGroup" v-model="newBotEntry.group">
+                  <select
+                    required
+                    class="selectGroup"
+                    v-model="newBotEntry.group"
+                  >
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -77,16 +81,37 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
+        <!-- student names input  -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Students</label>
+          </div>
+          <div class="field-body">
             <div class="field">
-              <input class="input" placeholder="Ricarda Schuster" disabled />
-              <input class="input" placeholder="Eldric Schwarz" disabled />
-              <input class="input" placeholder="Mina Dietrich" disabled />
+              <div v-for="(student, index) in students" :key="student">
+                <input
+                  class="input"
+                  placeholder="name"
+                  v-model.lazy="students[index]"
+                />
+                <span class="mt-5">
+                  <font-awesome-icon
+                    icon="minus-circle"
+                    size="1x"
+                    class="is-clickable"
+                    @click="students.splice(index, 1)"
+                  ></font-awesome-icon
+                ></span>
+              </div>
               <span class="mt-5">
                 <font-awesome-icon
                   icon="plus-circle"
                   size="1x"
                   class="is-clickable"
+                  @click="addInput"
                 ></font-awesome-icon
               ></span>
             </div>
@@ -101,6 +126,7 @@
           <div class="field-body">
             <div class="control">
               <input
+                required
                 class="input"
                 type="text"
                 placeholder="e.g Marvin"
@@ -118,18 +144,10 @@
           </div>
           <div class="field-body">
             <div class="field">
-              <FilePond
-                name="file"
-                ref="pond"
-                label-idle="Drop files here..."
-                credits="false"
-                max-file-size="3MB"
-                accepted-file-types="image/jpeg, image/png"
-                image-crop-aspect-ratio="1"
-                :files="myFiles"
-                @init="handleFilePondInit"
-                @addfile="handleFileAdd"
-              />
+              <croppa
+                v-model="myCroppa"
+                @file-choose="handleFileChoose"
+              ></croppa>
             </div>
           </div>
         </div>
@@ -221,61 +239,34 @@
 </template>
 
 <script>
+import Croppa from "vue-croppa";
+import "vue-croppa/dist/vue-croppa.css";
+
 import BaseButton from "@/components/UI/BaseButton";
-
-// Import Vue FilePond
-import vueFilePond from "vue-filepond";
-
-// Import FilePond styles
-import "filepond/dist/filepond.min.css";
-
-// Import FilePond plugins
-// Please note that you need to install these plugins separately
-
-// Import image preview plugin styles
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
-
-// Import image preview / file type validation / image crop / image transformation plugins
-import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import FilePondPluginImageCrop from "filepond-plugin-image-crop";
-import FilePondPluginImageTransform from "filepond-plugin-image-transform";
-import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
-import FilePondPluginImageEdit from "filepond-plugin-image-edit";
-import FilePondPluginImageResize from "filepond-plugin-image-resize";
-
-const FilePond = vueFilePond(
-  FilePondPluginFileValidateType,
-  FilePondPluginImagePreview,
-  FilePondPluginImageCrop,
-  FilePondPluginImageTransform,
-  FilePondPluginFileValidateSize,
-  FilePondPluginImageEdit,
-  FilePondPluginImageResize
-);
 
 export default {
   components: {
     BaseButton,
-    FilePond,
+    croppa: Croppa.component,
   },
   data() {
     return {
+      myCroppa: {},
       newBotEntry: {
         service: "AssistantV2",
+        semester: "Sommersemester 21",
+        term: "AIOT2",
       },
       file: "",
-      myFiles: [],
+      students: [],
     };
   },
-  computed: {},
   methods: {
-    handleFilePondInit() {
-      console.log("FilePond has initialized");
+    addInput() {
+      this.students.push("");
     },
-
-    handleFileAdd() {
-      this.file = this.$refs.pond.getFile().file;
+    handleFileChoose(file) {
+      this.file = file;
     },
 
     async createBotEntry() {
@@ -283,33 +274,40 @@ export default {
       const headers = new Headers();
       headers.append("Authorization", "Bearer " + token);
 
-      let newBotEntry = JSON.stringify(this.newBotEntry);
-      console.log(newBotEntry);
-      let formData = new FormData();
-      formData.append("botEntry", newBotEntry);
 
-      if (this.file) {
-        formData.append("profilePic", this.file, this.file.name);
-      }
-      const request = {
-        method: "POST",
-        headers: headers,
-        body: formData,
-      };
-      fetch("http://metathema.net/api/bots/", request)
-        .then(async (res) => {
-          // check for error response
-          if (!res.ok) {
-            // get error message from body or default to response status
-            const error = res.status;
-            return Promise.reject(error);
-          }
-          this.$router.push({ name: "dashboard" });
-        })
-        .catch((error) => {
-          this.errorMessage = error;
-          console.error("There was an error!", error);
-        });
+      const namesArray = [];
+      this.students.forEach((element) => {
+        namesArray.push({ name: element });
+      });
+      Object.assign(this.newBotEntry, { names: namesArray });
+
+      let newBotEntryForm = JSON.stringify(this.newBotEntry);
+
+      let formData = new FormData();
+      formData.append("botEntry", newBotEntryForm);
+
+      this.myCroppa.generateBlob((blob) => {
+        formData.append("profilePic", blob, this.file.name);
+        const request = {
+          method: "POST",
+          headers: headers,
+          body: formData,
+        };
+        fetch("http://www.metathema.net/api/bots/", request)
+          .then(async (res) => {
+            // check for error response
+            if (!res.ok) {
+              // get error message from body or default to response status
+              const error = res.status;
+              return Promise.reject(error);
+            }
+            this.$router.push({ name: "dashboard" });
+          })
+          .catch((error) => {
+            this.errorMessage = error;
+            console.error("There was an error!", error);
+          });
+      });
     },
   },
 };

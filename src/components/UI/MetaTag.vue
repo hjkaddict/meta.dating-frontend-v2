@@ -28,7 +28,7 @@ export default {
       // set multiple addon tags if it's object
       if (typeof this.addon === "object") {
         this.addon.forEach((a) => {
-          addonData.push(a);
+          addonData.push(a.name);
         });
       } else {
         addonData.push(this.addon);

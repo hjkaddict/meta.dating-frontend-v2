@@ -8,7 +8,7 @@ Vue.config.productionTip = false;
 //socket.io
 import VueSocketIOExt from "vue-socket.io-extended";
 import { io } from "socket.io-client";
-const socket = io("http://metathema.net");
+const socket = io("http://www.metathema.net");
 Vue.use(VueSocketIOExt, socket);
 
 // uuid
@@ -22,7 +22,9 @@ import {
   faDownload,
   faBackward,
   faPlay,
+  faPause,
   faInfoCircle,
+  faMinusCircle,
   faPlusCircle,
   faChevronCircleDown,
   faTrash,
@@ -35,7 +37,9 @@ library.add(
   faDownload,
   faBackward,
   faPlay,
+  faPause,
   faInfoCircle,
+  faMinusCircle,
   faPlusCircle,
   faChevronCircleDown,
   faTrash,

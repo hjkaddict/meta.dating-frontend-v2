@@ -8,21 +8,33 @@
       <div class="picture">
         <figure>
           <p class="image is-64x64">
-            <img
-              :src="message.image_path"
-              class="is-rounded"
-            />
+            <img :src="message.image_path" class="is-rounded" />
           </p>
         </figure>
       </div>
-      <div class="nameandchat has-text-right has-text-white m-2">
+
+      <div class="name-right has-text-right has-text-white m-2">
         <div>
           <p>
             {{ message.name }}
           </p>
         </div>
+        <div v-if="info">
+          <div
+            class="table is-borderless is-size-7 has-background-dark has-text-white has-text-left m-1"
+          >
+            <div v-if="message.intents" class="tbody">
+              <tr v-if="message.intents">
+                <th class="has-text-link">intents</th>
+                <td>#{{ message.intents.intent }}</td>
+                <td>confidence: {{ message.intents.confidence.toFixed(2) }}</td>
+              </tr>
+            </div>
+          </div>
+        </div>
+
         <div
-          class="box px-4"
+          class="box px-3 my-1"
           v-for="line in message.plaintext"
           v-bind:key="line.id"
         >
@@ -41,21 +53,32 @@
       <div class="picture">
         <figure>
           <p class="image is-64x64">
-            <img
-              :src="message.image_path"
-              class="is-rounded"
-            />
+            <img :src="message.image_path" class="is-rounded" />
           </p>
         </figure>
       </div>
-      <div class="nameandchat has-text-left has-text-white m-2">
+      <div class="name-left has-text-left has-text-white m-2">
         <div>
           <p>
             {{ message.name }}
           </p>
         </div>
+        <div v-if="info">
+          <div
+            class="table is-borderless is-size-7 has-background-dark has-text-white has-text-left m-1"
+          >
+            <div v-if="message.intents" class="tbody">
+              <tr v-if="message.intents">
+                <th class="has-text-link">intents</th>
+                <td>#{{ message.intents.intent }}</td>
+                <td>confidence: {{ message.intents.confidence.toFixed(2) }}</td>
+              </tr>
+            </div>
+          </div>
+        </div>
+
         <div
-          class="box px-4"
+          class="box px-3 my-1"
           v-for="line in message.plaintext"
           v-bind:key="line.id"
         >
@@ -74,6 +97,9 @@ export default {
       type: Object,
       required: false,
     },
+    info: {
+      type: Boolean
+    }
   },
   data: function() {
     return {
@@ -84,9 +110,22 @@ export default {
 </script>
 
 <style scoped>
-
 .box {
   max-width: 60vw;
+}
+
+.name-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.name-left {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 @media only screen and (max-width: 768px) {

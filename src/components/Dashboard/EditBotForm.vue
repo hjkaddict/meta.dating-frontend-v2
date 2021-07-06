@@ -77,16 +77,37 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
+        <!-- student names input  -->
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Students</label>
+          </div>
+          <div class="field-body">
             <div class="field">
-              <input class="input" placeholder="Ricarda Schuster" disabled />
-              <input class="input" placeholder="Eldric Schwarz" disabled />
-              <input class="input" placeholder="Mina Dietrich" disabled />
+              <div v-for="(student, index) in students" :key="student">
+                <input
+                  class="input"
+                  placeholder="name"
+                  v-model.lazy="students[index]"
+                />
+                <span class="mt-5">
+                  <font-awesome-icon
+                    icon="minus-circle"
+                    size="1x"
+                    class="is-clickable"
+                    @click="students.splice(index, 1)"
+                  ></font-awesome-icon
+                ></span>
+              </div>
               <span class="mt-5">
                 <font-awesome-icon
                   icon="plus-circle"
                   size="1x"
                   class="is-clickable"
+                  @click="addInput"
                 ></font-awesome-icon
               ></span>
             </div>
@@ -118,17 +139,11 @@
           </div>
           <div class="field-body">
             <div class="field">
-              <file-pond
-                name="file"
-                ref="pond"
-                label-idle="Drop files here..."
-                credits="false"
-                max-file-size="3MB"
-                accepted-file-types="image/jpeg, image/png"
-                image-crop-aspect-ratio="1"
-                @addfile="handleFileAdd"
-                :files="myFiles"
-              />
+              <croppa
+                :initial-image="ProfileData.image_path"
+                v-model="myCroppa"
+                @file-choose="handleFileChoose"
+              ></croppa>
             </div>
           </div>
         </div>
@@ -222,16 +237,20 @@
 
 <script>
 import BaseButton from "@/components/UI/BaseButton";
+import Croppa from "vue-croppa";
+import "vue-croppa/dist/vue-croppa.css";
 
 export default {
   components: {
     BaseButton,
+    croppa: Croppa.component,
   },
   data() {
     return {
+      myCroppa: {},
       editedBotEntry: this.ProfileData,
-      myFiles: this.ProfileData.image_path,
       file: "",
+      students: this.ProfileData.names,
     };
   },
   props: {
@@ -242,53 +261,64 @@ export default {
   },
   created() {
     if (!this.ProfileData) this.$router.push({ name: "dashboard" });
-    //console.log(this.ProfileData);
+    this.students = this.students.map(function(el) {
+      return el.name;
+    });
   },
+
   methods: {
-    handleFileAdd() {
-      this.file = this.$refs.pond.getFile().file;
-      console.log("MyFiles: " + this.myFiles );
-      console.log("this.file: " + this.file );
-      
+    addInput() {
+      this.students.push("");
+    },
+    handleFileChoose(file) {
+      this.file = file;
     },
 
     async updateBotEntry() {
       const token = localStorage.getItem("accessToken");
       const parameterURL =
-        "http://metathema.net/api/bots/service/" +
+        "http://www.metathema.net/api/bots/service/" +
         this.editedBotEntry.service +
         "/id/" +
         this.editedBotEntry._id;
       const headers = new Headers();
       headers.append("Authorization", "Bearer " + token);
 
-      let editedBotEntry = JSON.stringify(this.editedBotEntry);
-      let formData = new FormData();
-      formData.append("botEntry", editedBotEntry);
+      const namesArray = [];
 
-      if (this.file) {
-        formData.append("profilePic", this.file, this.file.name);
-      }
-      const request = {
-        method: "POST",
-        headers: headers,
-        //cache: "default",
-        body: formData,
-      };
-      fetch(parameterURL, request)
-        .then(async (res) => {
-          // check for error response
-          if (!res.ok) {
-            // get error message from body or default to response status
-            const error = res.status;
-            return Promise.reject(error);
-          }
-          this.$router.push({ name: "dashboard" });
-        })
-        .catch((error) => {
-          this.errorMessage = error;
-          console.error("There was an error!", error);
-        });
+      this.students.forEach((element) => {
+        namesArray.push({ name: element });
+      });
+
+      Object.assign(this.editedBotEntry, { names: namesArray });
+
+      let editedBotEntryForm = JSON.stringify(this.editedBotEntry);
+      let formData = new FormData();
+      formData.append("botEntry", editedBotEntryForm);
+
+      this.myCroppa.generateBlob((blob) => {
+        formData.append("profilePic", blob, this.file.name);
+        const request = {
+          method: "POST",
+          headers: headers,
+          //cache: "default",
+          body: formData,
+        };
+        fetch(parameterURL, request)
+          .then(async (res) => {
+            // check for error response
+            if (!res.ok) {
+              // get error message from body or default to response status
+              const error = res.status;
+              return Promise.reject(error);
+            }
+            this.$router.push({ name: "dashboard" });
+          })
+          .catch((error) => {
+            this.errorMessage = error;
+            console.error("There was an error!", error);
+          });
+      });
     },
   },
 };

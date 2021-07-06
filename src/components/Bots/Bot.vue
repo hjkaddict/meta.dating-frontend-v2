@@ -6,7 +6,7 @@
         @click="emitId()"
         @mouseover="isHover = true"
         @mouseleave="isHover = false"
-        :class="{'has-text-link': isHover }"
+        :class="{ 'has-text-link': isHover }"
       >
         <p class="pr-5">{{ bot.name }}</p>
       </li>

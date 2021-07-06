@@ -3,12 +3,11 @@
     class="has-background-dark p-5 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-text-left"
     v-if="this.metadata"
   >
-    <meta-tag
-      v-for="(value, key) in this.metadata"
-      :key="key"
-      :title="key"
-      :addon="value"
-    ></meta-tag>
+    <MetaTag v-if="this.metadata.service" title="Service" :addon="this.metadata.service" />
+    <MetaTag v-if="this.metadata.name" title="BotName" :addon="this.metadata.name" />
+    <MetaTag v-if="this.metadata.term"  title="Project" :addon="this.metadata.term" />
+    <MetaTag v-if="this.metadata.group" title="Group" :addon="this.metadata.group" />
+    <MetaTag v-if="this.metadata.names" title="Students" :addon="this.metadata.names" />
 
     <div
       class="is-border is-size-7 is-family-secondary px-3 has-background-link has-text-primary"

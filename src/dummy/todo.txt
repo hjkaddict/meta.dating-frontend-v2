@@ -1,13 +1,19 @@
+urgent: 
+3. Keep me login function 
+4. Dashboard design
+5. Mobile Design Modification 
+
+
+
 - login / dashboard api connection 
 
-  - 'bot add' function *successfully added, but image size should be changed, do I need to keep using Filepond?
   - loading bar between add/edit bot
   - keep me login function
 
 - database modification 
-  - add bot information
+  - add student names [{{id: 1},{name: something}}]
 
-- mobile design modification (weekend)
+- mobile design modification
 
 - term description
 
@@ -18,23 +24,12 @@
 disable button problem during bot selection in mobile
 
 
+for changing local <-> klausserver db
 
-Mongoose BotSchema:
+http://www.metathema.net
+http://www.metathema.net
 
-        Gruppe: {
-          type: Number,
-          required: true
-        },
-        Semester {
-          type: String,
-          required: true
-        },
-        Studierende: {
-          type: Object
-        },
-        Objekt : { // ex: Feuerzeug
-          type: Strng,
-          required: true
-        }
+
+
 
 
