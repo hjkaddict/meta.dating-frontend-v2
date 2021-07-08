@@ -41,7 +41,11 @@
                 <div class="field has-text-right">
                   <label for="" class="checkbox has-text-white">
                     eingelogt bleiben
-                    <p-check color="danger" class="mr-0 ml-3"></p-check>
+                    <p-check
+                      color="danger"
+                      class="mr-0 ml-3"
+                      v-model="credentials.stayLoggedIn"
+                    ></p-check>
                   </label>
                 </div>
 
@@ -84,10 +88,10 @@ export default {
         cache: "default",
         body: JSON.stringify(this.credentials),
       };
-      fetch("http://www.metathema.net/api/users/login", request)
+      fetch("http://metathema.net/api/users/login", request)
         .then(async (res) => {
           const token = await res.json();
-          
+
           // check for error response
           if (!res.ok) {
             // get error message from body or default to response status

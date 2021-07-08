@@ -1,4 +1,5 @@
 <template>
+  <!-- 데스크탑 창에서는 이 창이 한번만 만들어지지만 모바일에서는 계속 따로 만들어진다. 그렇게 때문에 chosenBots가 계속 비어있는 배열로 된다. 이걸 수정해야함 -->
   <section
     class="has-background-dark p-5 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-text-left"
     v-if="this.metadata"
@@ -66,11 +67,12 @@
         :focus="!this.metadata.isChosen"
       />
       <BaseButton
-        :disabled="this.disabled"
+        :disabled="disableButton"
         buttonTitle="auswählen"
         @click.native="addBot"
         :focus="this.metadata.isChosen"
       />
+      {{ disableButton }}
     </div>
   </section>
 </template>
@@ -90,7 +92,7 @@ export default {
       chosenBots: [],
     };
   },
-  props: ["metadata", "disabled"],
+  props: ["metadata"],
   emits: ["emit-chosen", "increment-selected", "decrement-selected"],
 
   created() {
@@ -106,7 +108,19 @@ export default {
   },
 
   computed: {
+    disableButton() {
+      var thisBotisChosen = this.chosenBots.some(
+        (bot) => bot.name === this.metadata.name
+      );
+      console.log(this.chosenBots.length);
 
+      if (this.chosenBots.length >= 2 || thisBotisChosen) {
+        console.log("disabled");
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     addBot() {

@@ -8,7 +8,7 @@ Vue.config.productionTip = false;
 //socket.io
 import VueSocketIOExt from "vue-socket.io-extended";
 import { io } from "socket.io-client";
-const socket = io("http://www.metathema.net");
+const socket = io("http://metathema.net");
 Vue.use(VueSocketIOExt, socket);
 
 // uuid
@@ -49,6 +49,11 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // register global function by mixin
 Vue.mixin({
+  data() {
+    return {
+      botbotbot: ['a','b','c','d','d'],
+    };
+  },
   methods: {
     isMobile() {
       if (

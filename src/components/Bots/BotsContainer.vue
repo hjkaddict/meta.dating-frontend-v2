@@ -9,7 +9,8 @@
 
       <!-- Bot description component only for desktop -->
       <bot-description
-        class="column is-two-thirds is-hidden-mobile hero is-fullheight"
+        v-if="!isMobile()"
+        class="column is-two-thirds hero is-fullheight"
         :metadata="selectedBot"
       ></bot-description>
     </div>
@@ -50,7 +51,7 @@ export default {
 
     const term = this.$router.currentRoute.params.id;
 
-    const response = await fetch("http://www.metathema.net/api/bots/term/" + term);
+    const response = await fetch("http://metathema.net/api/bots/term/" + term);
     const data = await response.json();
     this.botProfileData = data;
 
@@ -66,6 +67,7 @@ export default {
       this.toBase64();
 
       eventBus.$emit("chosen-bots", this.chosenBots.bots);
+
       this.botCounter = this.botCounter + 1;
     });
 

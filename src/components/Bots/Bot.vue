@@ -8,25 +8,29 @@
         @mouseleave="isHover = false"
         :class="{ 'has-text-link': isHover }"
       >
-        <p class="pr-5">{{ bot.name }}</p>
+        <p class="pr-5" :class="{ 'is-size-5': isMobile() }">{{ bot.name }}</p>
       </li>
     </div>
 
-    <bot-description
-      class="is-hidden-tablet has-background-dark"
-      v-if="select"
+    <BotDescription
+      class="has-background-dark"
+      v-if="select && isMobile()"
       :metadata="bot"
-    ></bot-description>
+      :disabled="this.disabled"
+    />
+    <!-- <BotDescriptionMobile v-if="select && isMobile()" :metadata="bot" /> -->
   </section>
 </template>
 <script>
 import BotDescription from "@/components/Bots/BotDescription";
+// import BotDescriptionMobile from "@/components/Bots/BotDescriptionMobile";
 import { eventBus } from "@/main";
 export default {
   components: {
     BotDescription,
+    // BotDescriptionMobile,
   },
-  props: ["bot"],
+  props: ["bot", "disabled"],
   emits: ["emit-bot-name"],
 
   methods: {

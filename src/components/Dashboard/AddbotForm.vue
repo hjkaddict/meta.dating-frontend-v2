@@ -207,7 +207,7 @@
         </div>
 
         <!-- sichtbar checkbox  -->
-        <div class="field is-horizontal">
+        <!-- <div class="field is-horizontal">
           <div class="field-label">
             <label for="" class="checkbox">
               Sichtbar
@@ -215,11 +215,10 @@
           </div>
           <div class="field-body">
             <div class="control">
-              <!-- In current setup, isPublic is set to false to all newBotEntry. It needs to be modified later -->
               <p-check color="danger" v-model="newBotEntry.isPublic"></p-check>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="level is-mobile">
           <div class="level-item">
@@ -293,7 +292,7 @@ export default {
           headers: headers,
           body: formData,
         };
-        fetch("http://www.metathema.net/api/bots/", request)
+        fetch("http://metathema.net/api/bots/", request)
           .then(async (res) => {
             // check for error response
             if (!res.ok) {

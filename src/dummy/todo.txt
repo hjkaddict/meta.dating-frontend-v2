@@ -1,5 +1,4 @@
 urgent: 
-3. Keep me login function 
 4. Dashboard design
 5. Mobile Design Modification 
 
@@ -14,22 +13,9 @@ urgent:
   - add student names [{{id: 1},{name: something}}]
 
 - mobile design modification
-
 - term description
-
 - team / imprint page design
 
-
 * to be fixed
-disable button problem during bot selection in mobile
-
-
-for changing local <-> klausserver db
-
-http://www.metathema.net
-http://www.metathema.net
-
-
-
-
-
+- on chat: entities are not stored in msg data.
+- on chat: there is only one intent in msg data.?

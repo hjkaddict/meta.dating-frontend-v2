@@ -1,8 +1,7 @@
 <template>
   <section
-    class="p-0 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end has-text-right"
+    class="p-0 mb-6 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end has-text-right"
   >
-
     <ol class="is-fullwidth">
       <bot
         class="my-2 border-transparent"
@@ -14,6 +13,7 @@
             !isMobile() && bot.name == selected,
           chosen: chosenBots.some((b) => b.name === bot.name),
         }"
+        :disabled="chosenBots.some((b) => b.name === bot.name) || chosenBots.length >= 2"
         @click.native="selected = bot.name"
       ></bot>
     </ol>
@@ -28,9 +28,12 @@ export default {
     Bot,
   },
   props: ["botlist"],
+  computed: {
+  },
   created() {
     eventBus.$on("chosen-bots", (chosenBots) => {
       this.chosenBots = chosenBots;
+      console.log(this.chosenBots);
     });
   },
   data() {

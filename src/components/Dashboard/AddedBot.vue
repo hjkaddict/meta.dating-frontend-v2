@@ -56,11 +56,11 @@
         </figure>
         <div class="media-content px-2">
           <div class="content">
-            <MetaTag title="Platform" :addon="this.addedbot.service" />
-            <MetaTag title="Term" :addon="this.addedbot.term" />
-            <MetaTag title="Semester" :addon="this.addedbot.semester" />
+            <MetaTag v-if="this.addedbot.service" title="Platform" :addon="this.addedbot.service" />
+            <MetaTag v-if="this.addedbot.term" title="Project" :addon="this.addedbot.term" />
+            <MetaTag v-if="this.addedbot.semester" title="Semester" :addon="this.addedbot.semester" />
             <!-- <MetaTag title="Account" :addon="this.addedbot.owner" /> -->
-            <MetaTag title="Group" :addon="this.addedbot.group" />
+            <MetaTag v-if="this.addedbot.group" title="Group" :addon="this.addedbot.group" />
             
           </div>
         </div>

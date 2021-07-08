@@ -13,7 +13,10 @@
               @click="infoOnOff()"
               @mouseover="isHoverInfo = true"
               @mouseleave="isHoverInfo = false"
-              :class="{ 'has-text-link': isHoverInfo, 'has-text-warning': info }"
+              :class="{
+                'has-text-link': isHoverInfo,
+                'has-text-warning': info,
+              }"
             ></font-awesome-icon>
           </div>
           <div class="level-item">
@@ -76,7 +79,8 @@
         </div>
         <div class="level is-mobile">
           <div class="level-item">
-            <p>{{ this.speedtext[this.speedLevel] }}</p>
+            <p v-if="pause"> pause </p>
+            <p v-if="!pause">{{ this.speedtext[this.speedLevel] }}</p>
           </div>
         </div>
       </div>

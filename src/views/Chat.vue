@@ -61,7 +61,7 @@ export default {
       );
       const refreshedBotQuery = btoa(JSON.stringify(decodedBotQuery));
       this.$socket.client.emit("room", this.room_id);
-      const queryURL = "http://www.metathema.net/api/chat/" + refreshedBotQuery;
+      const queryURL = "http://metathema.net/api/chat/" + refreshedBotQuery;
       const response = await fetch(queryURL);
       const data = await response.json();
       console.log(data);

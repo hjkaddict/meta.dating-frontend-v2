@@ -58,7 +58,7 @@
         <!-- group number select -->
         <div class="field is-horizontal ">
           <div class="field-label is-normal">
-            <label class="label">Group</label>
+            <label class="label">Group *</label>
           </div>
           <div class="field-body">
             <div class="field is-grouped">
@@ -277,7 +277,7 @@ export default {
     async updateBotEntry() {
       const token = localStorage.getItem("accessToken");
       const parameterURL =
-        "http://www.metathema.net/api/bots/service/" +
+        "http://metathema.net/api/bots/service/" +
         this.editedBotEntry.service +
         "/id/" +
         this.editedBotEntry._id;
