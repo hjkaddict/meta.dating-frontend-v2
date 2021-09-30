@@ -33,7 +33,6 @@ export default {
   created() {
     eventBus.$on("chosen-bots", (chosenBots) => {
       this.chosenBots = chosenBots;
-      console.log(this.chosenBots);
     });
   },
   data() {

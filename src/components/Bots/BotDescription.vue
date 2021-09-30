@@ -63,13 +63,11 @@
       <BaseButton
         buttonTitle="abwählen"
         @click.native="removeBot"
-        :focus="!this.metadata.isChosen"
       />
       <BaseButton
-        :disabled="this.disabled"
+        :disabled="this.disabled || disableButton"
         buttonTitle="auswählen"
         @click.native="addBot"
-        :focus="this.metadata.isChosen"
       />
     </div>
   </section>
@@ -106,7 +104,13 @@ export default {
   },
 
   computed: {
-
+    disableButton() {
+      if (this.chosenBots.length >= 2) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     addBot() {
