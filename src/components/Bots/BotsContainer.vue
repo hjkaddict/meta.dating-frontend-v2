@@ -1,26 +1,27 @@
 <template>
   <section>
-    <div class="columns m-0" :class="{ 'p-5': isMobile() }">
+    <div class="columns m-0" :class="{ 'p-5': $screen.width <= 1023 }">
       <!-- botllist="botProfileData" : sending botProfileData as a prop to BotList -->
-      <bot-list
-        class="column is-one-third has-background-primary"
+      <BotList
+        class="column has-background-primary"
+        :class="{ 'is-one-third': $screen.width > 1023 }"
         :botlist="botProfileData"
-      ></bot-list>
+      />
 
       <!-- Bot description component only for desktop -->
-      <bot-description
-        v-if="!isMobile()"
-        class="column is-two-thirds hero is-fullheight"
+      <BotDescription
+        class="column hero is-fullheight"
+        v-if="$screen.width > 1023"
         :metadata="selectedBot"
-      ></bot-description>
+      />
     </div>
 
     <!-- control panel which is always fixed at the bottom  -->
-    <control-panel
+    <ControlPanel
       class="control-panel"
       :chosenBots="chosenBots"
       :base64="chosenBotsBase64"
-    ></control-panel>
+    />
   </section>
 </template>
 
@@ -51,7 +52,9 @@ export default {
 
     const term = this.$router.currentRoute.params.id;
 
-    const response = await fetch("http://metathema.net/api/bots/term/" + term);
+    const response = await fetch(
+      "http://localhost:3000/api/bots/term/" + term
+    );
     const data = await response.json();
     this.botProfileData = data;
 
@@ -62,6 +65,8 @@ export default {
         service: profileData.service,
         turn: this.botCounter,
       };
+
+      console.log(chosenBot.name + " is selected for arena");
 
       this.chosenBots.bots.push(chosenBot);
       this.toBase64();

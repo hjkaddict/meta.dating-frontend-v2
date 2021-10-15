@@ -1,35 +1,44 @@
 <template>
   <section
-    class="hero p-5"
+    class="hero px-5 pb-5"
     :class="{
       'is-primary desktop-border': !isMobile(),
       'is-dark mobile-border': isMobile(),
     }"
   >
     <div class="hero-body">
-      <div>
-        <meta-tag
-          v-for="(value, key) in this.metadata"
-          :key="key"
-          :title="key"
-          :addon="value"
-        ></meta-tag>
-        <div v-html="metadata.description">
-          {{ metadata.description }}
+      <div
+        class="is-flex"
+        :class="{
+          'is-flex-direction-column-reverse': isMobile(),
+          'is-flex-direction-column': !isMobile(),
+        }"
+      >
+        <!-- metatags and description -->
+        <div>
+          <meta-tag
+            v-for="(value, key) in this.metadata"
+            :key="key"
+            :title="key"
+            :addon="value"
+          ></meta-tag>
+          <div class="is-family-secondary" v-html="metadata.description">
+            {{ metadata.description }}
+          </div>
         </div>
 
-        <!-- Zum Projekt Button  -->
+        <!-- Zum project Button  -->
         <div class="level">
           <!-- Left side must be declared here even though it's blank for applying level-right below -->
           <div class="level-left"></div>
 
           <!-- Right side -->
           <div
-            class="pt-5"
+            class="py-5"
             :class="{ 'level-item': isMobile(), 'level-right': !isMobile() }"
           >
-            <router-link :to="'/projekt/' + returnUrlParameter">
-              <base-button :buttonTitle="'Zum Projekt'"></base-button>
+            <router-link :to="'/project/' + returnUrlParameter">
+              <base-button :buttonTitle="'Zum project'"></base-button>
             </router-link>
           </div>
         </div>

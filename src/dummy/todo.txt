@@ -1,21 +1,37 @@
-urgent: 
-4. Dashboard design
-5. Mobile Design Modification 
+before Rundgang
+
+13.OCT
+- 'Timestamp' on Dashboard should be simple
+- Good functioning LOGIN/OUT process?
 
 
+* To be discussed
+- When download JSON, we can serve json from back-end ideally. However, because the chat speed is controlled in front-end, back-end chat log is still on working. Therefore chat view on front-end side and back-end JSON are not going to be the same. 
+  Solution: 
+  1. create new JSON file in front-end.
+  2. controlling chat speed in back-end
 
-- login / dashboard api connection 
+- on chat: there is only one intent in msg data?
 
-  - loading bar between add/edit bot
-  - keep me login function
 
-- database modification 
-  - add student names [{{id: 1},{name: something}}]
+DONE: 
+- Refactoring / Logical Routing
 
-- mobile design modification
-- term description
-- team / imprint page design
+- Cookie Banner
+  -> done: Pop up notification is built.
 
-* to be fixed
-- on chat: entities are not stored in msg data.
-- on chat: there is only one intent in msg data.?
+- Mobile Design and Details
+  - project view is clicked on mobile and "choose button" should be floating or seen. 
+    -> done: I put selection button on the top, not at the bottom of the description. 
+
+  - by choosing a new project, any other opened project should be collapsed back, same thing should adapt to bot selection.
+    -> functional problem. When choosing a new project and collapsing opened one, the scroll stays at the bottom of the new project description. Does it necessary to be changed?
+    -> The reason that we didn't collapse other bot was that user might want to see other bots info in parallel. 
+     
+  - instead of hiding elements, implement hooks with event listeners which are activated by resizing the viewport and replacing components with pure mobile ones. 
+    -> I keep the way of hiding elements. 
+
+
+- Download Button / QR code / New ... Button
+  - Finished all function except download JSON
+

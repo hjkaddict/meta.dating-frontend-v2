@@ -13,11 +13,19 @@
     </div>
 
     <BotDescription
-      class="has-background-dark"
-      v-if="select && isMobile()"
+      class="has-background-dark b"
+      v-if="select && $screen.width <= 1023"
       :metadata="bot"
       :disabled="this.disabled"
     />
+    
+    <!-- code below is old. revised: 04.10.21 -->
+    <!-- <BotDescription
+      class="has-background-dark b"
+      v-if="select && isMobile()"
+      :metadata="bot"
+      :disabled="this.disabled"
+    /> -->
     <!-- <BotDescriptionMobile v-if="select && isMobile()" :metadata="bot" /> -->
   </section>
 </template>
@@ -60,7 +68,7 @@ export default {
   color: #f64c72;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1023px) {
   /* For mobile phones: */
   .chosen {
     border-width: 1px 1px 1px 20px;

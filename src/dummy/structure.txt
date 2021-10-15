@@ -9,12 +9,12 @@ Home [view]
         ---- SemesterDescription (is-hidden-desktop) [component]
           ---- MetaTags [component]
           ---- <div>description</div>  
-          ---- BaseButton:zumprojekt [component]
+          ---- BaseButton:zumproject [component]
 
     -- SemesterDescription (is-hidden-mobile) [component]
       --- MetaTags [component]
       --- <div>description</div>  
-      --- BaseButton:zumprojekt [component]
+      --- BaseButton:zumproject [component]
 
     -- ProjectOverview [component]
 

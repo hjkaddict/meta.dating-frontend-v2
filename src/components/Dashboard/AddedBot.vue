@@ -56,12 +56,27 @@
         </figure>
         <div class="media-content px-2">
           <div class="content">
-            <MetaTag v-if="this.addedbot.service" title="Platform" :addon="this.addedbot.service" />
-            <MetaTag v-if="this.addedbot.term" title="Project" :addon="this.addedbot.term" />
-            <MetaTag v-if="this.addedbot.semester" title="Semester" :addon="this.addedbot.semester" />
+            <MetaTag
+              v-if="this.addedbot.service"
+              title="Platform"
+              :addon="this.addedbot.service"
+            />
+            <MetaTag
+              v-if="this.addedbot.term"
+              title="Project"
+              :addon="this.addedbot.term"
+            />
+            <MetaTag
+              v-if="this.addedbot.semester"
+              title="Semester"
+              :addon="this.addedbot.semester"
+            />
             <!-- <MetaTag title="Account" :addon="this.addedbot.owner" /> -->
-            <MetaTag v-if="this.addedbot.group" title="Group" :addon="this.addedbot.group" />
-            
+            <MetaTag
+              v-if="this.addedbot.group"
+              title="Group"
+              :addon="this.addedbot.group"
+            />
           </div>
         </div>
       </article>
@@ -74,30 +89,29 @@
       </div>
     </div>
 
-    <base-modal
+    <DeleteBotModal
       v-show="isModalVisible"
       @close="closeModal"
       :addedbot="this.addedbot"
-    >
-    </base-modal>
+    />
   </section>
 </template>
 
 <script>
 import MetaTag from "@/components/UI/MetaTag";
-import BaseModal from "@/components/UI/BaseModal.vue";
+import DeleteBotModal from "@/components/UI/DeleteBotModal.vue";
 
 export default {
   components: {
     MetaTag,
-    BaseModal,
+    DeleteBotModal,
   },
   props: ["addedbot"],
   data() {
     return {
       isModalVisible: false,
       id: this.addedbot._id,
-      ProfileData: this.addedbot
+      ProfileData: this.addedbot,
     };
   },
   methods: {

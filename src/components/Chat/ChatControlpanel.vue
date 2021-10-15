@@ -68,18 +68,20 @@
           </div>
           <div class="level-item">
             <font-awesome-icon
-              icon="download"
+              icon="ellipsis-h"
               size="2x"
               class="is-clickable"
-              @mouseover="isHoverDownload = true"
-              @mouseleave="isHoverDownload = false"
-              :class="{ 'has-text-link': isHoverDownload }"
+              @mouseover="isHoverMore = true"
+              @mouseleave="isHoverMore = false"
+              @click="emitMoreFunction()"
+              :class="{ 'has-text-link': isHoverMore }"
             ></font-awesome-icon>
           </div>
         </div>
+
         <div class="level is-mobile">
           <div class="level-item">
-            <p v-if="pause"> pause </p>
+            <p v-if="pause">pause</p>
             <p v-if="!pause">{{ this.speedtext[this.speedLevel] }}</p>
           </div>
         </div>
@@ -101,9 +103,11 @@ export default {
       isHoverBackward: false,
       isHoverPlayPause: false,
       isHoverForward: false,
-      isHoverDownload: false,
+      isHoverMore: false,
+      isOnMore: false,
     };
   },
+  props: ["emit-pause-to-control-panel", "emit-close-moretab"],
   emits: ["emit-pause"],
 
   methods: {
@@ -123,10 +127,30 @@ export default {
       if (this.speedLevel < 2) this.speedLevel++;
       eventBus.$emit("emit-speed", this.speedLevel);
     },
+    emitMoreFunction() {
+      this.isOnMore = !this.isOnMore;
+      eventBus.$emit("emit-more-function", this.isOnMore);
+    },
+  },
+
+  created() {
+    eventBus.$on("emit-pause-to-controlpanel", (value) => {
+      this.pause = value;
+    });
+    eventBus.$on("emit-moretab", (value) => {
+      this.isOnMore = value;
+    });
   },
 };
 </script>
 <style scoped>
+.test {
+  position: absolute;
+
+  background: white;
+  color: black;
+  /* bottom: 75px; */
+}
 .hero {
   height: 100%;
 }

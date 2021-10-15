@@ -277,7 +277,7 @@ export default {
     async updateBotEntry() {
       const token = localStorage.getItem("accessToken");
       const parameterURL =
-        "http://metathema.net/api/bots/service/" +
+        "http://localhost:3000/api/bots/service/" +
         this.editedBotEntry.service +
         "/id/" +
         this.editedBotEntry._id;
@@ -293,11 +293,12 @@ export default {
       Object.assign(this.editedBotEntry, { names: namesArray });
 
       let editedBotEntryForm = JSON.stringify(this.editedBotEntry);
+
       let formData = new FormData();
       formData.append("botEntry", editedBotEntryForm);
-
+      
       this.myCroppa.generateBlob((blob) => {
-        formData.append("profilePic", blob, this.file.name);
+        formData.append("profilePic", blob, this.ProfileData.image_path);
         const request = {
           method: "POST",
           headers: headers,

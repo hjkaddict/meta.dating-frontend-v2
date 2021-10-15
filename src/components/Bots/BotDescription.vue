@@ -1,55 +1,59 @@
 <template>
   <section
-    class="has-background-dark p-5 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start has-text-left"
+    class="has-background-dark p-5 is-flex is-justify-content-center is-align-items-flex-start has-text-left"
+    :class="{
+      'is-flex-direction-column': !isMobile(),
+      'is-flex-direction-column-reverse': isMobile(),
+    }"
     v-if="this.metadata"
   >
-    <MetaTag
-      v-if="this.metadata.service"
-      title="Service"
-      :addon="this.metadata.service"
-    />
-    <MetaTag
-      v-if="this.metadata.name"
-      title="BotName"
-      :addon="this.metadata.name"
-    />
-    <MetaTag
-      v-if="this.metadata.term"
-      title="Project"
-      :addon="this.metadata.term"
-    />
-    <MetaTag
-      v-if="this.metadata.group"
-      title="Group"
-      :addon="this.metadata.group"
-    />
-    <MetaTag
-      v-if="this.metadata.names"
-      title="Students"
-      :addon="this.metadata.names"
-    />
-
-    <div
-      class="is-border is-size-7 is-family-secondary px-3 has-background-link has-text-primary"
-    >
-      <p>image</p>
-    </div>
-
+    <!-- meta tag section -->
     <div>
-      <figure class="image is-128x128 is-border">
-        <img :src="this.metadata.image_path" />
-      </figure>
-    </div>
+      <div>
+        <MetaTag
+          v-if="this.metadata.service"
+          title="Service"
+          :addon="this.metadata.service"
+        />
+        <MetaTag
+          v-if="this.metadata.name"
+          title="BotName"
+          :addon="this.metadata.name"
+        />
+        <MetaTag
+          v-if="this.metadata.term"
+          title="Project"
+          :addon="this.metadata.term"
+        />
+        <MetaTag
+          v-if="this.metadata.group"
+          title="Group"
+          :addon="this.metadata.group"
+        />
+        <MetaTag
+          v-if="this.metadata.names"
+          title="Students"
+          :addon="this.metadata.names"
+        />
+      </div>
 
-    <div
-      class="is-border is-size-7 is-family-secondary px-3 py-0 has-background-link has-text-primary mt-3"
-    >
-      <p>description</p>
-    </div>
-    <div
-      class="is-border has-background-primary has-text-white is-size-7 is-family-secondary p-3"
-    >
-      {{ this.metadata.description }}
+      <!-- image section  -->
+      <div>
+        <MetaTag title="image" addon="none" />
+        <figure class="image is-128x128 is-border">
+          <img :src="this.metadata.image_path" />
+        </figure>
+      </div>
+
+      <!-- description section  -->
+      <div class="mt-1">
+        <MetaTag title="Description" addon="none" />
+        <div
+          class="is-border has-background-primary has-text-white is-size-7 is-family-secondary p-3"
+        >
+          {{ this.metadata.description }}
+        </div>
+      </div>
     </div>
 
     <div
@@ -60,13 +64,10 @@
       }"
       v-if="metadata"
     >
-      <BaseButton
-        buttonTitle="abwählen"
-        @click.native="removeBot"
-      />
+      <BaseButton buttonTitle="cancel" @click.native="removeBot" />
       <BaseButton
         :disabled="this.disabled || disableButton"
-        buttonTitle="auswählen"
+        buttonTitle="select"
         @click.native="addBot"
       />
     </div>
@@ -92,7 +93,6 @@ export default {
   emits: ["emit-chosen", "increment-selected", "decrement-selected"],
 
   created() {
-    console.log("created");
     eventBus.$on("chosen-bots", (bots) => {
       this.chosenBots = bots;
     });

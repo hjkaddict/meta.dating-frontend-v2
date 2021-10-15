@@ -1,7 +1,7 @@
 <template>
   <section>
     <div
-      class="my-3 ml-5"
+      class="my-3 ml-5 py-1"
       :class="{
         selectedDesktop: selection && !isMobile(),
         selectedMobile: select && isMobile(),
@@ -24,11 +24,7 @@
     </div>
 
     <!-- Semester Descrption on mobile -->
-    <term-description
-      class="is-hidden-tablet"
-      v-if="select"
-      :metadata="this.term"
-    ></term-description>
+    <TermDescription v-if="select && isMobile()" :metadata="this.term" />
   </section>
 </template>
 
@@ -63,10 +59,12 @@ export default {
 <style scoped>
 .selectedDesktop {
   color: #f64c72;
+  background: #082b9d;
+  /* outline: 1px solid #f64c72; */
+  /* outline-offset: 0px; */
   border: solid #f64c72;
   border-width: 1px 0px 1px 40px;
-  background: #082b9d;
-  outline: 1px solid #082b9d;
+  box-shadow: 1px 0px 0 #082b9d;
 }
 
 .selectedMobile {
@@ -75,5 +73,9 @@ export default {
   border-width: 1px 1px 1px 20px;
   background: #082b9d;
   outline: 1px solid #082b9d;
+}
+
+.aaa {
+  /* border: 1px solid transparent; */
 }
 </style>

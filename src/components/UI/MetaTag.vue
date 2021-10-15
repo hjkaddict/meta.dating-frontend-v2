@@ -31,6 +31,7 @@ export default {
           addonData.push(a.name);
         });
       } else {
+        if(this.addon !== "none")
         addonData.push(this.addon);
       }
       return addonData;
@@ -39,13 +40,13 @@ export default {
   methods: {
     filterData() {
       return this.title === "_id" ||
-      this.title === "assistant_id" ||
-      this.title === "date_created" ||
-      this.title === "apikey" ||
-      this.title === "isPublic" ||
-      this.title === "owner" || 
-      this.title === "__v" ||
-      this.title === "description" ||
+        this.title === "assistant_id" ||
+        this.title === "date_created" ||
+        this.title === "apikey" ||
+        this.title === "isPublic" ||
+        this.title === "owner" ||
+        this.title === "__v" ||
+        this.title === "description" ||
         this.title === "id" ||
         this.title === "image_path"
         ? false

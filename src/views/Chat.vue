@@ -9,6 +9,8 @@
         <ChatContainer :messages="this.messages" />
       </div>
 
+      <QrcodeModal :value="this.directLinkToChat" />
+
       <div class="hero-foot has-background-primary has-text-white">
         <ChatControlpanel />
       </div>
@@ -19,11 +21,14 @@
 import Nav from "@/components/Nav/Nav";
 import ChatContainer from "@/components/Chat/ChatContainer";
 import ChatControlpanel from "@/components/Chat/ChatControlpanel";
+import QrcodeModal from "@/components/UI/QrcodeModal.vue";
+
 export default {
   components: {
     Nav,
     ChatContainer,
     ChatControlpanel,
+    QrcodeModal,
   },
   props: {
     routed: Boolean,
@@ -35,8 +40,11 @@ export default {
       botQuery: this.$route.params.base64,
       messages: [],
       pause: false,
+      directLinkToChat: "",
     };
   },
+
+  methods: {},
 
   sockets: {
     connect() {
@@ -61,11 +69,16 @@ export default {
       );
       const refreshedBotQuery = btoa(JSON.stringify(decodedBotQuery));
       this.$socket.client.emit("room", this.room_id);
-      const queryURL = "http://metathema.net/api/chat/" + refreshedBotQuery;
+      const queryURL = "http://localhost:3000/api/chat/" + refreshedBotQuery;
       const response = await fetch(queryURL);
       const data = await response.json();
       console.log(data);
     }
+
+    //save url as a variable for qr code
+    this.directLinkToChat = "http://localhost:8080" + this.$route.path;
+    // this.directLinkToChat = "https://www.1stg.me"
+    console.log(this.directLinkToChat);
   },
   beforeDestroy() {
     // disconnect socket in order to stop recursive function on server

@@ -40,8 +40,8 @@
       <div class="hero-body">
         <div class="container has-text-centered has-text-white">
           <ol class="is-family-primary is-size-2 p-3 ">
-            <router-link to="/projekt" tag="li" active-class="active"
-              >Projekt</router-link
+            <router-link to="/project" tag="li" active-class="active"
+              >Project</router-link
             >
             <router-link to="/team" tag="li" active-class="active"
               >Team</router-link
@@ -90,7 +90,7 @@ export default {
   computed: {
     backButtonIsDisplayed() {
       if (
-        this.$router.history.current.path === "/projekt" || this.isDashboard
+        this.$router.history.current.path === "/project" || this.isDashboard
       ) {
         return false;
       } else {

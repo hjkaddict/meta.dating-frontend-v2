@@ -6,19 +6,21 @@
         :class="{ 'is-flex is-flex-direction-column-reverse': isMobile() }"
       >
         <TermList
-          class="column is-one-third"
-          :class="{ 'p-5': isMobile() }"
+          class="column"
+          :class="{ 'p-5': isMobile(), ' is-one-third': !isMobile() }"
           @this-term="storeSelectedTerm"
         />
 
         <ProjectOverview
           class="column"
-          :class="{ 'is-hidden-tablet': selecterdTerm }"
+          :class="{ 'is-hidden': selectedTerm && $screen.width > 1023 }"
         />
+
+        <!-- only for desktop -->
         <TermDescription
-          class="column is-hidden-mobile is-fullheight"
-          v-if="selecterdTerm"
-          :metadata="selecterdTerm"
+          class="column is-fullheight"
+          v-if="selectedTerm && $screen.width > 1023"
+          :metadata="selectedTerm"
         />
       </div>
     </div>
@@ -33,7 +35,7 @@ import TermDescription from "@/components/Home/TermDescription";
 export default {
   data() {
     return {
-      selecterdTerm: null,
+      selectedTerm: null,
     };
   },
   components: {
@@ -44,7 +46,7 @@ export default {
   methods: {
     //store the semester from TermList and save it as a variable. This variable will be sent to TermDescription as props.
     storeSelectedTerm(term) {
-      this.selecterdTerm = term;
+      this.selectedTerm = term;
     },
   },
 };

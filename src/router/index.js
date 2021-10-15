@@ -17,20 +17,20 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/projekt",
+    redirect: "/project",
     name: "home",
     component: Home,
   },
   {
-    path: "/projekt",
+    path: "/project",
     component: Home,
   },
   {
-    path: "/projekt/:id",
+    path: "/project/:id",
     component: Bots,
   },
   {
-    path: "/projekt/:base64",
+    path: "/chat/:base64",
     name: "chat",
     component: Chat,
     props: true,

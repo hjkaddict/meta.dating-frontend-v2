@@ -273,7 +273,7 @@ export default {
       const headers = new Headers();
       headers.append("Authorization", "Bearer " + token);
 
-
+      //create student namesArray
       const namesArray = [];
       this.students.forEach((element) => {
         namesArray.push({ name: element });
@@ -286,13 +286,14 @@ export default {
       formData.append("botEntry", newBotEntryForm);
 
       this.myCroppa.generateBlob((blob) => {
+        console.log(this.file.name)
         formData.append("profilePic", blob, this.file.name);
         const request = {
           method: "POST",
           headers: headers,
           body: formData,
         };
-        fetch("http://metathema.net/api/bots/", request)
+        fetch("http://localhost:3000/api/bots/", request)
           .then(async (res) => {
             // check for error response
             if (!res.ok) {

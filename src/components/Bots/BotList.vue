@@ -3,7 +3,7 @@
     class="p-0 mb-6 is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end has-text-right"
   >
     <ol class="is-fullwidth">
-      <bot
+      <Bot
         class="my-2 border-transparent"
         v-for="bot in this.botlist"
         :key="bot.id"
@@ -13,9 +13,11 @@
             !isMobile() && bot.name == selected,
           chosen: chosenBots.some((b) => b.name === bot.name),
         }"
-        :disabled="chosenBots.some((b) => b.name === bot.name) || chosenBots.length >= 2"
+        :disabled="
+          chosenBots.some((b) => b.name === bot.name) || chosenBots.length >= 2
+        "
         @click.native="selected = bot.name"
-      ></bot>
+      />
     </ol>
   </section>
 </template>
@@ -28,8 +30,7 @@ export default {
     Bot,
   },
   props: ["botlist"],
-  computed: {
-  },
+  computed: {},
   created() {
     eventBus.$on("chosen-bots", (chosenBots) => {
       this.chosenBots = chosenBots;
@@ -55,7 +56,7 @@ export default {
   color: #f64c72;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1023px) {
   /* For mobile phones: */
   .is-fullwidth {
     width: 100%;

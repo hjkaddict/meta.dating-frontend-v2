@@ -5,7 +5,7 @@
         <Nav />
       </div>
 
-      <div class="blank is-hidden-tablet"></div>
+      <div v-if="$screen.width <= 1023" class="blank"></div>
 
       <div
         class="hero-body"

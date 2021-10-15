@@ -1,14 +1,20 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import VueScreen from 'vue-screen';
+
 require("@/assets/main.scss");
 
 Vue.config.productionTip = false;
 
+//vue-screen 
+Vue.use(VueScreen);
+
+
 //socket.io
 import VueSocketIOExt from "vue-socket.io-extended";
 import { io } from "socket.io-client";
-const socket = io("http://metathema.net");
+const socket = io("http://localhost:3000");
 Vue.use(VueSocketIOExt, socket);
 
 // uuid
@@ -19,7 +25,7 @@ Object.defineProperty(Vue.prototype, "$uuidv4", { value: uuidv4 });
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowLeft,
-  faDownload,
+  faEllipsisH,
   faBackward,
   faPlay,
   faPause,
@@ -34,7 +40,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(
   faArrowLeft,
-  faDownload,
+  faEllipsisH,
   faBackward,
   faPlay,
   faPause,
@@ -51,15 +57,20 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.mixin({
   data() {
     return {
-      botbotbot: ['a','b','c','d','d'],
+      botbotbot: ["a", "b", "c", "d", "d"],
     };
   },
   methods: {
     isMobile() {
-      if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
+      // if (
+      //   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      //     navigator.userAgent
+      //   )
+      // )
+      //   return true;
+      // else return false;
+
+      if (this.$screen.width <= 1023
       ) {
         return true;
       } else {
