@@ -293,7 +293,7 @@ export default {
           headers: headers,
           body: formData,
         };
-        fetch("http://localhost:3000/api/bots/", request)
+        fetch("https://metathema.net/api/bots/", request)
           .then(async (res) => {
             // check for error response
             if (!res.ok) {

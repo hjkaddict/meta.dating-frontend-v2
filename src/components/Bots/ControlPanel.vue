@@ -46,7 +46,7 @@ export default {
       this.$socket.client.connect();
       // request connection to new room
       this.$socket.client.emit("room", this.chosenBots.conversation_id);
-      const queryURL = "http://localhost:3000/api/chat/" + this.base64;
+      const queryURL = "https://metathema.net/api/chat/" + this.base64;
       const response = await fetch(queryURL);
       const data = await response.json();
       console.log(data)
