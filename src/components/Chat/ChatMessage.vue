@@ -43,8 +43,8 @@
         </div>
 
         <div
-          class="box px-3 my-0"
-          :class="{ 'is-border': pdfDiv }"
+          class="box px-3 my-1"
+          :class="{ 'is-border my-0': pdfDiv }"
           v-for="line in message.plaintext"
           v-bind:key="line.id"
         >
