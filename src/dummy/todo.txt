@@ -1,3 +1,6 @@
+AIOT2sose01@meta-dating.de
+AIOT2021sose01!
+
 before Rundgang
 
 To be fixed
@@ -14,8 +17,8 @@ To be fixed
 
 - Overall :
   -* When menu is clicked on dashboard route, 'Bots' text is shown on the top left. 
+  -* 'Timestamp' on Dashboard should be simple
   - i.e, when access the webpage with /project/AIOT route, it is not working. 
-  - 'Timestamp' on Dashboard should be simple
   - Good functioning LOGIN/OUT process?
 
 

@@ -13,7 +13,7 @@ Vue.use(VueScreen);
 //socket.io
 import VueSocketIOExt from "vue-socket.io-extended";
 import { io } from "socket.io-client";
-const socket = io("https://www.metathema.net");
+const socket = io("http://192.168.0.109:3000");
 Vue.use(VueSocketIOExt, socket);
 
 // uuid

@@ -42,7 +42,7 @@
           <div class="level-left"></div>
           <div class="level-right">
             <div class="level-item is-family-secondary is-size-7">
-              <p>created: {{ this.addedbot.date_created }}</p>
+              <p>created: {{ dateFormatter(this.addedbot.date_created) }}</p>
             </div>
           </div>
         </div>
@@ -130,6 +130,12 @@ export default {
         },
       });
     },
+    dateFormatter(input) {
+      var date = ""
+      var cut = input.substring(0, 10);
+      date = cut.substring(8, 10) + '.' + cut.substring(5,7) + '.' + cut.substring(2, 4)
+      return date
+    }
   },
 };
 </script>

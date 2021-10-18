@@ -53,7 +53,7 @@ export default {
     const term = this.$router.currentRoute.params.id;
 
     const response = await fetch(
-      "https://www.metathema.net/api/bots/term/" + term
+      "http://192.168.0.109:3000/api/bots/term/" + term
     );
     const data = await response.json();
     this.botProfileData = data;
