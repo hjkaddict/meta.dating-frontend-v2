@@ -2,6 +2,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import VueScreen from "vue-screen";
+import VueMeta from "vue-meta";
+
+// For Title: metaInfo in App.vue
+Vue.use(VueMeta);
 
 require("@/assets/main.scss");
 
