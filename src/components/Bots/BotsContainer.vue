@@ -53,7 +53,7 @@ export default {
     const term = this.$router.currentRoute.params.id;
 
     const response = await fetch(
-      "https://metathema.net/api/bots/term/" + term
+      "https://www.metathema.net/api/bots/term/" + term
     );
     const data = await response.json();
     this.botProfileData = data;
@@ -66,7 +66,7 @@ export default {
         turn: this.botCounter,
       };
 
-      console.log(chosenBot.name + " is selected for arena");
+      // console.log(chosenBot.name + " is selected for arena");
 
       this.chosenBots.bots.push(chosenBot);
       this.toBase64();
@@ -112,7 +112,7 @@ export default {
 }
 .control-panel {
   position: fixed;
-  height: 8vh;
+  height: 10vh;
   bottom: 0;
   width: 100vw;
   z-index: 0;

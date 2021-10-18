@@ -1,20 +1,19 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import VueScreen from 'vue-screen';
+import VueScreen from "vue-screen";
 
 require("@/assets/main.scss");
 
 Vue.config.productionTip = false;
 
-//vue-screen 
+//vue-screen
 Vue.use(VueScreen);
-
 
 //socket.io
 import VueSocketIOExt from "vue-socket.io-extended";
 import { io } from "socket.io-client";
-const socket = io("https://metathema.net");
+const socket = io("https://www.metathema.net");
 Vue.use(VueSocketIOExt, socket);
 
 // uuid
@@ -35,6 +34,8 @@ import {
   faChevronCircleDown,
   faTrash,
   faEdit,
+  faBars,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -49,17 +50,14 @@ library.add(
   faPlusCircle,
   faChevronCircleDown,
   faTrash,
-  faEdit
+  faEdit,
+  faBars,
+  faTimes
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // register global function by mixin
 Vue.mixin({
-  data() {
-    return {
-      botbotbot: ["a", "b", "c", "d", "d"],
-    };
-  },
   methods: {
     isMobile() {
       // if (
@@ -70,8 +68,7 @@ Vue.mixin({
       //   return true;
       // else return false;
 
-      if (this.$screen.width <= 1023
-      ) {
+      if (this.$screen.width <= 1023) {
         return true;
       } else {
         return false;

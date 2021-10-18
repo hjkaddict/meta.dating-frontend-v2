@@ -7,28 +7,53 @@
       <!-- Left side: Back Button (not appears on Home/Dashboard view)-->
       <div class="level-left">
         <div class="level-item" v-if="backButtonIsDisplayed">
-          <BackButton />
+          <div :style="{ color: 'white' }">
+            <font-awesome-icon
+              class="is-clickable"
+              icon="arrow-left"
+              :size="sizeChange"
+              @click="$router.go(-1)"
+              @mouseover="isBackBtnHover = true"
+              @mouseleave="isBackBtnHover = false"
+              :class="{ 'has-text-link': isBackBtnHover }"
+            ></font-awesome-icon>
+          </div>
         </div>
-        <div class="level-item" v-if="isDashboard">
+        <div class="level-item" v-if="isDashboard && !isClicked">
           <p class="is-size-5">Bots</p>
         </div>
       </div>
 
       <!-- Right side: Burger Menu always appears on every view-->
       <div class="level-right">
-        <div @click="openNavList()">
-          <div
-            id="nav-icon"
-            :class="{ open: isClicked }"
+        <div
+          @click="openNavList()"
+          :style="{ color: 'white' }"
+          v-if="!isClicked"
+        >
+          <font-awesome-icon
+            class="is-clickable"
+            icon="bars"
+            :size="sizeChange"
             @mouseover="isHover = true"
             @mouseleave="isHover = false"
-          >
-            <span
-              :class="{ 'has-background-link': isClicked || isHover }"
-              v-for="a in 4"
-              :key="a.id"
-            ></span>
-          </div>
+            :class="{ 'has-text-link': isHover }"
+          ></font-awesome-icon>
+        </div>
+
+        <div
+          @click="openNavList()"
+          :style="{ color: 'white' }"
+          v-if="isClicked"
+        >
+          <font-awesome-icon
+            class="is-clickable"
+            icon="times"
+            :size="sizeChange"
+            @mouseover="isHover = true"
+            @mouseleave="isHover = false"
+            :class="{ 'has-text-link': isHover }"
+          ></font-awesome-icon>
         </div>
       </div>
     </nav>
@@ -82,15 +107,20 @@
 </template>
 
 <script>
-import BackButton from "@/components/Nav/BackButton";
+// import BackButton from "@/components/Nav/BackButton";
 export default {
   components: {
-    BackButton,
+    // BackButton,
   },
   computed: {
+    sizeChange() {
+      if (this.isMobile()) return "2x";
+      else return "3x";
+    },
     backButtonIsDisplayed() {
       if (
-        this.$router.history.current.path === "/project" || this.isDashboard
+        this.$router.history.current.path === "/project" ||
+        this.isDashboard
       ) {
         return false;
       } else {
@@ -110,6 +140,7 @@ export default {
     return {
       isClicked: false,
       isHover: false,
+      isBackBtnHover: false
     };
   },
   methods: {
@@ -142,82 +173,5 @@ li:hover {
 
 .active {
   color: #f64c72;
-}
-
-/* burgerMenu animation below */
-#nav-icon {
-  width: 40px;
-  height: 45px;
-  position: relative;
-  margin: auto;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-  cursor: pointer;
-  z-index: 99;
-}
-
-#nav-icon span {
-  display: block;
-  position: absolute;
-  height: 6px;
-  width: 100%;
-  background: white;
-  /* background:  #f64c72; */
-
-  opacity: 1;
-  left: 0;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: 0.25s ease-in-out;
-  -moz-transition: 0.25s ease-in-out;
-  -o-transition: 0.25s ease-in-out;
-  transition: 0.25s ease-in-out;
-}
-
-#nav-icon span:nth-child(1) {
-  top: 5px;
-}
-
-#nav-icon span:nth-child(2),
-#nav-icon span:nth-child(3) {
-  top: 19px;
-}
-
-#nav-icon span:nth-child(4) {
-  top: 33px;
-}
-
-#nav-icon.open span:nth-child(1) {
-  top: 18px;
-  width: 0%;
-  left: 50%;
-}
-
-#nav-icon.open span:nth-child(2) {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-#nav-icon.open span:nth-child(3) {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-
-#nav-icon.open span:nth-child(4) {
-  top: 18px;
-  width: 0%;
-  left: 50%;
 }
 </style>

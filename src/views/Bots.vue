@@ -5,7 +5,7 @@
         <Nav />
       </div>
 
-      <div v-if="$screen.width <= 1023" class="blank"></div>
+      <div v-if="isMobile()" class="blank"></div>
 
       <div
         class="hero-body"
@@ -13,7 +13,7 @@
           'is-align-items-flex-start': isMobile(),
         }"
       >
-        <bots-container></bots-container>
+        <BotsContainer />
       </div>
     </div>
   </section>

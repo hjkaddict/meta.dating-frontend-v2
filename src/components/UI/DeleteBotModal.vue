@@ -42,7 +42,7 @@ export default {
     async confirmDeletion() {
       const token = localStorage.getItem("accessToken");
       const parameterURL =
-        "https://metathema.net/api/bots/service/" +
+        "https://www.metathema.net/api/bots/service/" +
         this.ProfileData.service +
         "/id/" +
         this.ProfileData._id;

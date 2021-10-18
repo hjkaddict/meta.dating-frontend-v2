@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="hero is-fullheight">
+    <div class="hero">
       <div class="hero-head">
         <Nav />
       </div>
@@ -69,7 +69,7 @@ export default {
       );
       const refreshedBotQuery = btoa(JSON.stringify(decodedBotQuery));
       this.$socket.client.emit("room", this.room_id);
-      const queryURL = "https://metathema.net/api/chat/" + refreshedBotQuery;
+      const queryURL = "https://www.metathema.net/api/chat/" + refreshedBotQuery;
       const response = await fetch(queryURL);
       const data = await response.json();
       console.log(data);
@@ -90,13 +90,13 @@ export default {
 .hero-body {
   position: fixed;
   width: 100vw;
-  height: 90vh;
+  height: 90%;
 }
 
 .hero-foot {
   position: fixed;
   width: 100vw;
   bottom: 0;
-  height: 10vh;
+  height: 10%;
 }
 </style>

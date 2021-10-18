@@ -14,29 +14,19 @@
 
     <BotDescription
       class="has-background-dark b"
-      v-if="select && $screen.width <= 1023"
-      :metadata="bot"
-      :disabled="this.disabled"
-    />
-    
-    <!-- code below is old. revised: 04.10.21 -->
-    <!-- <BotDescription
-      class="has-background-dark b"
       v-if="select && isMobile()"
       :metadata="bot"
       :disabled="this.disabled"
-    /> -->
-    <!-- <BotDescriptionMobile v-if="select && isMobile()" :metadata="bot" /> -->
+      @collapseDescription="emitCollapse"
+    />
   </section>
 </template>
 <script>
 import BotDescription from "@/components/Bots/BotDescription";
-// import BotDescriptionMobile from "@/components/Bots/BotDescriptionMobile";
 import { eventBus } from "@/main";
 export default {
   components: {
     BotDescription,
-    // BotDescriptionMobile,
   },
   props: ["bot", "disabled"],
   emits: ["emit-bot-name"],
@@ -46,12 +36,21 @@ export default {
       this.select = !this.select;
       eventBus.$emit("emit-bot-name", this.bot.name);
     },
+    emitCollapse(value) {
+      console.log(value)
+      this.select = !value
+    }
   },
   data() {
     return {
       select: false,
       isHover: false,
     };
+  },
+  created() {
+    eventBus.$on("increment-selected", (value) => {
+      if (value == this.bot.name) this.select = false;
+    });
   },
 };
 </script>

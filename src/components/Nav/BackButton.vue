@@ -3,7 +3,7 @@
     <font-awesome-icon
       class="is-clickable"
       icon="arrow-left"
-      size="3x"
+      :size="sizeChange"
       @click="$router.go(-1)"
       @mouseover="isHover = true"
       @mouseleave="isHover = false"
@@ -16,7 +16,14 @@ export default {
   data() {
     return {
       isHover: false,
+      iconSize: '3x'
     };
   },
+  computed: {
+    sizeChange() {
+      if (this.isMobile()) return '2x'
+      else return '3x'
+    }
+  }
 };
 </script>

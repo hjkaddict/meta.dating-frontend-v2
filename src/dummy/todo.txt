@@ -1,8 +1,22 @@
 before Rundgang
 
-13.OCT
-- 'Timestamp' on Dashboard should be simple
-- Good functioning LOGIN/OUT process?
+To be fixed
+
+- Mobile :
+  -* Chat: Text size, image size should be reduced.
+  -* Nav: A size of back button / menu button should be reduced
+  -* When 'select' the bot, the bot description should be collapsed. 
+  -* Because of chrome/safari interface, 'screen cut' issue occurs. This should be fixed in design-wise. 
+  - white space top and bottom
+
+- Desktop : 
+  -* Bot can be selected duplicately
+
+- Overall :
+  -* When menu is clicked on dashboard route, 'Bots' text is shown on the top left. 
+  - i.e, when access the webpage with /project/AIOT route, it is not working. 
+  - 'Timestamp' on Dashboard should be simple
+  - Good functioning LOGIN/OUT process?
 
 
 * To be discussed

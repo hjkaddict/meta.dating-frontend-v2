@@ -8,7 +8,7 @@
           <div class="level-item">
             <font-awesome-icon
               icon="info-circle"
-              size="2x"
+              :size="iconSize"
               class="is-clickable"
               @click="infoOnOff()"
               @mouseover="isHoverInfo = true"
@@ -22,7 +22,7 @@
           <div class="level-item">
             <font-awesome-icon
               icon="backward"
-              size="2x"
+              :size="iconSize"
               class="is-clickable"
               @click="speedBackward()"
               @mouseover="isHoverBackward = true"
@@ -35,7 +35,7 @@
               <font-awesome-icon
                 v-if="pause"
                 icon="play"
-                size="2x"
+                :size="iconSize"
                 class="is-clickable"
                 @click="pauseFunction()"
                 @mouseover="isHoverPlayPause = true"
@@ -45,7 +45,7 @@
               <font-awesome-icon
                 v-if="!pause"
                 icon="pause"
-                size="2x"
+                :size="iconSize"
                 class="is-clickable"
                 @click="pauseFunction()"
                 @mouseover="isHoverPlayPause = true"
@@ -57,7 +57,7 @@
           <div class="level-item">
             <font-awesome-icon
               icon="backward"
-              size="2x"
+              :size="iconSize"
               class="is-clickable"
               flip="horizontal"
               @click="speedForward()"
@@ -69,7 +69,7 @@
           <div class="level-item">
             <font-awesome-icon
               icon="ellipsis-h"
-              size="2x"
+              :size="iconSize"
               class="is-clickable"
               @mouseover="isHoverMore = true"
               @mouseleave="isHoverMore = false"
@@ -109,7 +109,12 @@ export default {
   },
   props: ["emit-pause-to-control-panel", "emit-close-moretab"],
   emits: ["emit-pause"],
-
+  computed: {
+    iconSize() {
+      if (this.isMobile()) return '1x'
+      else return '2x'
+    }
+  },
   methods: {
     infoOnOff() {
       this.info = !this.info;

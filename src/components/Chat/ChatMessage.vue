@@ -7,7 +7,10 @@
     >
       <div class="picture">
         <figure>
-          <p class="image is-64x64">
+          <p
+            class="image"
+            :class="{ 'is-64x64': !isMobile(), 'is-48x48': isMobile() }"
+          >
             <img :src="message.image_path" class="is-rounded" />
           </p>
         </figure>
@@ -15,7 +18,10 @@
 
       <div
         class="name-right has-text-right has-text-white m-2 is-size-6"
-        :class="{ 'has-text-black is-size-7 m-0': pdfDiv }"
+        :class="{
+          'has-text-black is-size-7 m-0': pdfDiv,
+          'is-size-7': isMobile(),
+        }"
       >
         <div>
           <p>
@@ -44,7 +50,7 @@
 
         <div
           class="box px-3 my-1"
-          :class="{ 'is-border my-0': pdfDiv }"
+          :class="{ 'is-border my-0': pdfDiv, 'is-size-7 p-1': isMobile() }"
           v-for="line in message.plaintext"
           v-bind:key="line.id"
         >
@@ -62,14 +68,20 @@
     >
       <div class="picture">
         <figure>
-          <p class="image is-64x64">
+          <p
+            class="image"
+            :class="{ 'is-64x64': !isMobile(), 'is-48x48': isMobile() }"
+          >
             <img :src="message.image_path" class="is-rounded" />
           </p>
         </figure>
       </div>
       <div
         class="name-left has-text-left m-1 has-text-white"
-        :class="{ 'has-text-black is-size-7 m-0': pdfDiv }"
+        :class="{
+          'has-text-black is-size-7 m-0': pdfDiv,
+          'is-size-7': isMobile(),
+        }"
       >
         <div>
           <p>
@@ -97,7 +109,7 @@
 
         <div
           class="box px-3 my-1"
-          :class="{ 'is-border': pdfDiv }"
+          :class="{ 'is-border my-0': pdfDiv, 'is-size-7 p-1': isMobile() }"
           v-for="line in message.plaintext"
           v-bind:key="line.id"
         >
@@ -162,7 +174,7 @@ export default {
 @media only screen and (max-width: 1023px) {
   /* For mobile phones: */
   .box {
-    max-width: 100vw;
+    max-width: 70vw;
   }
 }
 </style>

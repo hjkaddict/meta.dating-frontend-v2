@@ -53,6 +53,7 @@
         >
           {{ this.metadata.description }}
         </div>
+        <p>{{ this.disableStatus }}</p>
       </div>
     </div>
 
@@ -66,7 +67,7 @@
     >
       <BaseButton buttonTitle="cancel" @click.native="removeBot" />
       <BaseButton
-        :disabled="this.disabled || disableButton"
+        :disabled="this.disabled || checkbots"
         buttonTitle="select"
         @click.native="addBot"
       />
@@ -85,12 +86,18 @@ export default {
 
   data() {
     return {
+      disableStatus: false,
       tmp: undefined,
       chosenBots: [],
     };
   },
   props: ["metadata", "disabled"],
-  emits: ["emit-chosen", "increment-selected", "decrement-selected"],
+  emits: [
+    "emit-chosen",
+    "increment-selected",
+    "decrement-selected",
+    "collapseDescription",
+  ],
 
   created() {
     eventBus.$on("chosen-bots", (bots) => {
@@ -104,20 +111,38 @@ export default {
   },
 
   computed: {
-    disableButton() {
-      if (this.chosenBots.length >= 2) {
-        return true;
-      } else {
-        return false;
-      }
+    // if two bots are selected, disable button
+    checkbots() {
+      //check if the bot is included in this.chosenBots
+      var bot = this.chosenBots.find((bot) => bot.name == this.metadata.name);
+
+      //check if this.chosenBots.length is larger than 2
+      var overSelect = this.chosenBots.length >= 2 ? true : false;
+
+      //if the bot is included then select button is disabled
+      if (bot == undefined && !overSelect) return false;
+      else return true;
     },
   },
   methods: {
+    // checkbots() {
+    //   console.log(this.metadata.name);
+    //   //check if the bot is included in this.chosenBots
+    //   var bot = this.chosenBots.find((bot) => bot.name == this.metadata.name);
+    //   //if included then disable the button
+    //   console.log(bot);
+    //   if (bot.length == 0) this.disableStatus = false;
+    //   else {
+    //     this.disableStatus = true;
+    //   }
+    // },
     addBot() {
       eventBus.$emit("increment-selected", this.metadata);
+      this.$emit("collapseDescription", true);
     },
     removeBot() {
       eventBus.$emit("decrement-selected", this.metadata);
+      this.$emit("collapseDescription", true);
     },
   },
 };
