@@ -53,7 +53,6 @@
         >
           {{ this.metadata.description }}
         </div>
-        <p>{{ this.disableStatus }}</p>
       </div>
     </div>
 
