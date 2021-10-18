@@ -39,7 +39,7 @@ export default {
       headers: headers,
     };
 
-    fetch("http://192.168.0.109:3000/api/bots/protected", request)
+    fetch("https://www.metathema.net/api/bots/protected", request)
       .then(async (res) => {
         this.botProfileData = await res.json();
 
