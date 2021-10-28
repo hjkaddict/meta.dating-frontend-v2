@@ -51,7 +51,7 @@ export default {
           name: "Daniel Franke",
           email: "",
           imgUrl: "Daniel.png",
-          bio: "",
+          bio: "Daniel Franke (*06.09.1982) ist ein Künstler, Kurator und künstlerischer Forscher. Er lebt und arbeitet derzeit in Berlin. Er studierte Visuelle Kommunikation und Medienkunst an der Universität der Künste Berlin, schloss 2009 seine Diplom bei Prof. Siegfried Zielinski ab und erlangte 2011 seinen Meisterschüler bei Prof. Joachim Sauter und Prof. Alberto DeCampo. Derzeit ist er Lehrender an der Universität der Künste Berlin sowie der Leupahana Universität Lüneburg und Doktorand an der Bauhaus-Universität in Weimar. Davor war er künstlerischer Mitarbeiter im Bereich Medienkunst an der Hochschule für Gestaltung, Karlsruhe (HfG). Er ist zudem einer der Gründer von LEAP (Lab for Electronic Arts and Performance), einem interdisziplinären Non-Profit-Projekt für aufstrebende, digitale Medienkunst und Performance, das den Dialog zwischen Kunst, Wissenschaft und Technologie zu initiieren versuchte. In seinen eigenen Arbeiter fordert er das Verständnis des Digitalen heraus mit dem Ziel es im Kontext einer physischen Wahrnehmung am Transformationsprozess des algorithmischen Denkens zum Realen zu untersuchen. Dabei transformiert er, aus der klassischen Animation, sowie von Simulations-Prozessen bekannte Praktiken in greifbare Formen in der “realen”, faktischen und körperlichen Welt, mit dem Ziel komplexe Zusammenhänge zu erforschen und zu visualisieren.",
         },
         {
           name: "Hyungjoong Kim",
