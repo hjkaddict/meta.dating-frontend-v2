@@ -58,7 +58,7 @@ export default {
           email: "hjkaddict@gmail.com",
           imgUrl: "Hyungjoong.png",
           bio:
-            "Tutor, Generative Kunst, Absolvent in Kunst und Medien Udk http://hyungjoongkim.com",
+            "Tutor, Generative Kunst, Absolvent in Kunst und Medien Udk",
         },
       ],
     };
