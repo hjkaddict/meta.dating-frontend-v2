@@ -2,7 +2,7 @@
   <div class="modal" :class="{ 'is-active': this.on }">
     <div class="modal-background" @click="close"></div>
     <div class="modal-content is-flex is-justify-content-center">
-      <QrcodeVue style="border: 5px solid black" :value="value" :size="300" level="L" />
+      <QrcodeVue style="" :value="value" :size="300" level="L" />
     </div>
   </div>
 </template>

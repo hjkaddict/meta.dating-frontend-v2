@@ -77,7 +77,7 @@ export default {
     }
 
     //save url as a variable for qr code
-    this.directLinkToChat = "https://metathema.net/#" + this.$route.path;
+    this.directLinkToChat = "https://www.metathema.net/#" + this.$route.path;
     console.log(this.directLinkToChat);
   },
   beforeDestroy() {
