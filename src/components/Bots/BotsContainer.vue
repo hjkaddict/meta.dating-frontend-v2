@@ -51,7 +51,7 @@ export default {
     //fetching bots from backend
 
     const term = this.$router.currentRoute.params.id;
-
+    console.log(term);
     const response = await fetch(
       "https://www.metathema.net/api/bots/term/" + term
     );
