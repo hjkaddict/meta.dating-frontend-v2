@@ -81,6 +81,21 @@ export default {
           description:
             "<br>Artificial Intelligence X Internet of Things<br><br>ANY IMAGINABLE OBJECT TALKS.<br>Das Internet der Dinge. Lange Zeit Vision, heute komplexe Realität, die allzuoft auf ein vereinfachendes Bildnis reduziert wird: Objekte ’sprechen‘ mit dem Internet, mit einer Datenbank, dem Nutzer oder miteinander. Nehmen wir diesen Gedanken einmal wörtlich. Gehen wir davon aus, jedes beliebige Objekt liesse sich in ein „connected device“, ein „smart object“ oder „enchanted object“ verwandeln. Was würden diese Dinge sagen, wenn sie plötzlich sprechen könnten? Wie würden diese sich ausdrücken – und mit wem und worüber würden diese Dinge überhaupt reden? <br><br> ARTIFICIAL INTELLIGENCE OFF TOPIC. <br> In dem experimentellen projectseminar meta.dating AIOT haben die Objekte nicht nur ein Wörtchen mitzureden, sondern spielen die Hauptrolle in einem Diskurs, in dem nicht weniger verhandelt wird als ihre eigene Identität. <br><br>Oder entdecken wir spielerisch eine subversive Ebene des Turing-Tests:<br>ALLES INTELLIGENT ODER TUT-SO?",
         },
+        {
+           id: 2,
+           topic: "BrandBotLove",
+           term: "wintersemester20-21 / sommersemester21",
+           platform: "Watson Assistant V2",
+           lecturer: "Klaus Gasteier",
+           mitarbeiter: [
+            { name: "Alexej Bormatenkow" },
+            { name: "Dominikus Muncha" },
+            { name: "Daniel Franke" },
+          ],
+           tutor: [{ name: "Hyungjoong Kim" }],
+           description:
+             "<br>Halbwahrheiten. Diesdas.",
+        },
         // {
         //   id: 3,
         //   topic: "BrandBotLove",
