@@ -27,6 +27,7 @@
             <div class="control">
               <div class="select">
                 <select v-model="newBotEntry.semester">
+                  <option>Wintersemester 21-22</option>
                   <option>Sommersemester 21</option>
                   <option>Wintersemester 20-21</option>
                   <option>Sommersemester 20</option>
@@ -47,6 +48,7 @@
             <div class="control">
               <div class="select">
                 <select v-model="newBotEntry.term">
+                  <option>TruthinessMachines</option>
                   <option>AIOT2</option>
                   <option>AIOT</option>
                 </select>
@@ -253,8 +255,8 @@ export default {
       myCroppa: {},
       newBotEntry: {
         service: "AssistantV2",
-        semester: "Sommersemester 21",
-        term: "AIOT2",
+        semester: "Wintersemester 21-22",
+        term: "TruthinessMachines",
       },
       file: "",
       students: [],

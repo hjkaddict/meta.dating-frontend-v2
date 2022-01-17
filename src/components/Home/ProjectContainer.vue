@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="fullwidth">
     <div class="container is-fluid p-0">
       <div
         class="columns m-0"
@@ -52,4 +52,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.fullwidth {
+  width: 100vw;
+}
+</style>
