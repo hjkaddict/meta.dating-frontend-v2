@@ -10,8 +10,9 @@
           <div class="field-body">
             <div class="control">
               <div class="select">
-                <select>
+                <select v-model="newBotEntry.service">
                   <option>Watson Assistant V2</option>
+                  <option>SAP Conversational AI</option>
                 </select>
               </div>
             </div>
@@ -27,6 +28,7 @@
             <div class="control">
               <div class="select">
                 <select v-model="newBotEntry.semester">
+                  <option>Sommersemester 22</option>
                   <option>Wintersemester 21-22</option>
                   <option>Sommersemester 21</option>
                   <option>Wintersemester 20-21</option>
@@ -172,6 +174,82 @@
           </div>
         </div>
 
+        <!-- SAPCAI auth_url input  -->
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Auth URL *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Auth URL"
+                required
+                v-model="newBotEntry.auth_url"
+              />
+            </div>
+          </div>
+        </div>
+
+         <!-- SAPCAI client_id input  -->
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Client ID *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Client ID"
+                required
+                v-model="newBotEntry.client_id"
+              />
+            </div>
+          </div>
+        </div>
+
+         <!-- SAPCAI client_secret input  -->
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Client Secret *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Client Secret"
+                required
+                v-model="newBotEntry.client_secret"
+              />
+            </div>
+          </div>
+        </div>
+
+          <!-- SAPCAI request_token input  -->
+
+         <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Request Token *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Request Token"
+                required
+                v-model="newBotEntry.request_token"
+              />
+            </div>
+          </div>
+        </div>
+
         <!-- Assistant ID input  -->
         <div class="field is-horizontal">
           <div class="field-label is-normal">
@@ -254,7 +332,6 @@ export default {
     return {
       myCroppa: {},
       newBotEntry: {
-        service: "AssistantV2",
         semester: "Wintersemester 21-22",
         term: "TruthinessMachines",
       },
