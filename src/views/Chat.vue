@@ -70,14 +70,14 @@ export default {
       const refreshedBotQuery = btoa(JSON.stringify(decodedBotQuery));
       this.$socket.client.emit("room", this.room_id);
       const queryURL =
-        "https://www.metathema.net/api/chat/" + refreshedBotQuery;
+        "http://localhost:3000/api/chat/" + refreshedBotQuery;
       const response = await fetch(queryURL);
       const data = await response.json();
       console.log(data);
     }
 
     //save url as a variable for qr code
-    this.directLinkToChat = "https://www.metathema.net/#" + this.$route.path;
+    this.directLinkToChat = "http://localhost:3000/#" + this.$route.path;
     console.log(this.directLinkToChat);
   },
   beforeDestroy() {

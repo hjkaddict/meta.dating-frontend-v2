@@ -11,8 +11,8 @@
             <div class="control">
               <div class="select">
                 <select v-model="newBotEntry.service">
-                  <option>Watson Assistant V2</option>
-                  <option>SAP Conversational AI</option>
+                  <option>AssistantV2</option>
+                  <option>SAPCAI</option>
                 </select>
               </div>
             </div>
@@ -363,6 +363,7 @@ export default {
 
       let formData = new FormData();
       formData.append("botEntry", newBotEntryForm);
+      console.dir(formData)
 
       this.myCroppa.generateBlob((blob) => {
         console.log(this.file.name)
@@ -372,7 +373,7 @@ export default {
           headers: headers,
           body: formData,
         };
-        fetch("https://www.metathema.net/api/bots/", request)
+        fetch("http://localhost:3000/api/bots/", request)
           .then(async (res) => {
             // check for error response
             if (!res.ok) {

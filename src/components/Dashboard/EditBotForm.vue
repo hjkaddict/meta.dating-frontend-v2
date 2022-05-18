@@ -10,8 +10,14 @@
           <div class="field-body">
             <div class="control">
               <div class="select">
-                <select>
-                  <option>Watson Assistant V2</option>
+                <select v-model="ProfileData.service">
+                  <option
+                    @click="serviceSelect(platform)"
+                    v-for="platform in platforms"
+                    :value="platform"
+                    v-bind:key="platform"
+                    >{{ platform }}</option
+                  >
                 </select>
               </div>
             </div>
@@ -27,6 +33,7 @@
             <div class="control">
               <div class="select">
                 <select v-model="ProfileData.semester">
+                   <option>Sommersemester 22</option>
                   <option>Wintersemester 21-22</option>
                   <option>Sommersemester 21</option>
                   <option>Wintersemester 20-21</option>
@@ -168,8 +175,84 @@
           </div>
         </div>
 
+                <!-- SAPCAI auth_url input  -->
+
+        <div class="field is-horizontal"  v-if="platformSelected == 'SAPCAI'">
+          <div class="field-label is-normal">
+            <label class="label">Auth URL *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Auth URL"
+                required
+                v-model="ProfileData.auth_url"
+              />
+            </div>
+          </div>
+        </div>
+
+         <!-- SAPCAI client_id input  -->
+
+        <div class="field is-horizontal"  v-if="platformSelected == 'SAPCAI'">
+          <div class="field-label is-normal">
+            <label class="label">Client ID *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Client ID"
+                required
+                v-model="ProfileData.client_id"
+              />
+            </div>
+          </div>
+        </div>
+
+         <!-- SAPCAI client_secret input  -->
+
+        <div class="field is-horizontal"  v-if="platformSelected == 'SAPCAI'">
+          <div class="field-label is-normal">
+            <label class="label">Client Secret *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Client Secret"
+                required
+                v-model="ProfileData.client_secret"
+              />
+            </div>
+          </div>
+        </div>
+
+          <!-- SAPCAI request_token input  -->
+
+         <div class="field is-horizontal"  v-if="platformSelected == 'SAPCAI'">
+          <div class="field-label is-normal">
+            <label class="label">Request Token *</label>
+          </div>
+          <div class="field-body">
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Request Token"
+                required
+                v-model="ProfileData.request_token"
+              />
+            </div>
+          </div>
+        </div>
+
         <!-- Assistant ID input  -->
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" v-if="platformSelected == 'AssistantV2'">
           <div class="field-label is-normal">
             <label class="label">Assistant ID *</label>
           </div>
@@ -187,7 +270,7 @@
         </div>
 
         <!-- API Key input -->
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" v-if="platformSelected == 'AssistantV2'">
           <div class="field-label is-normal">
             <label class="label">API Key *</label>
           </div>
@@ -253,6 +336,8 @@ export default {
       editedBotEntry: this.ProfileData,
       file: "",
       students: this.ProfileData.names,
+      platforms: ["AssistantV2", "SAPCAI"],
+      platformSelected: this.ProfileData.service,
     };
   },
   props: {
@@ -268,7 +353,14 @@ export default {
     });
   },
 
+  computed: {},
+
   methods: {
+    serviceSelect(platform) {
+      this.platformSelected = platform;
+      console.log(this.platformSelected);
+    },
+
     addInput() {
       this.students.push("");
     },
@@ -279,7 +371,7 @@ export default {
     async updateBotEntry() {
       const token = localStorage.getItem("accessToken");
       const parameterURL =
-        "https://www.metathema.net/api/bots/service/" +
+        "http://localhost:3000/api/bots/service/" +
         this.editedBotEntry.service +
         "/id/" +
         this.editedBotEntry._id;
@@ -298,7 +390,7 @@ export default {
 
       let formData = new FormData();
       formData.append("botEntry", editedBotEntryForm);
-      
+
       this.myCroppa.generateBlob((blob) => {
         formData.append("profilePic", blob, this.ProfileData.image_path);
         const request = {
