@@ -11,8 +11,13 @@
             <div class="control">
               <div class="select">
                 <select v-model="newBotEntry.service">
-                  <option>AssistantV2</option>
-                  <option>SAPCAI</option>
+                  <option
+                    @click="serviceSelect(platform)"
+                    v-for="platform in platforms"
+                    :value="platform"
+                    v-bind:key="platform"
+                    >{{ platform }}</option
+                  >
                 </select>
               </div>
             </div>
@@ -176,7 +181,7 @@
 
         <!-- SAPCAI auth_url input  -->
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" v-if="platformSelected == 'SAPCAI'">
           <div class="field-label is-normal">
             <label class="label">Auth URL *</label>
           </div>
@@ -193,9 +198,9 @@
           </div>
         </div>
 
-         <!-- SAPCAI client_id input  -->
+        <!-- SAPCAI client_id input  -->
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" v-if="platformSelected == 'SAPCAI'">
           <div class="field-label is-normal">
             <label class="label">Client ID *</label>
           </div>
@@ -212,9 +217,9 @@
           </div>
         </div>
 
-         <!-- SAPCAI client_secret input  -->
+        <!-- SAPCAI client_secret input  -->
 
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" v-if="platformSelected == 'SAPCAI'">
           <div class="field-label is-normal">
             <label class="label">Client Secret *</label>
           </div>
@@ -231,9 +236,9 @@
           </div>
         </div>
 
-          <!-- SAPCAI request_token input  -->
+        <!-- SAPCAI request_token input  -->
 
-         <div class="field is-horizontal">
+        <div class="field is-horizontal" v-if="platformSelected == 'SAPCAI'">
           <div class="field-label is-normal">
             <label class="label">Request Token *</label>
           </div>
@@ -251,7 +256,10 @@
         </div>
 
         <!-- Assistant ID input  -->
-        <div class="field is-horizontal">
+        <div
+          class="field is-horizontal"
+          v-if="platformSelected == 'AssistantV2'"
+        >
           <div class="field-label is-normal">
             <label class="label">Assistant ID *</label>
           </div>
@@ -269,7 +277,10 @@
         </div>
 
         <!-- API Key input -->
-        <div class="field is-horizontal">
+        <div
+          class="field is-horizontal"
+          v-if="platformSelected == 'AssistantV2'"
+        >
           <div class="field-label is-normal">
             <label class="label">API Key *</label>
           </div>
@@ -332,14 +343,21 @@ export default {
     return {
       myCroppa: {},
       newBotEntry: {
-        semester: "Wintersemester 21-22",
+        semester: "Sommersemester 22",
         term: "TruthinessMachines",
+        isPublic: false,
       },
       file: "",
       students: [],
+      platforms: ["AssistantV2", "SAPCAI"],
+      platformSelected: "",
     };
   },
   methods: {
+    serviceSelect(platform) {
+      this.platformSelected = platform;
+      console.log(this.platformSelected);
+    },
     addInput() {
       this.students.push("");
     },
@@ -363,10 +381,10 @@ export default {
 
       let formData = new FormData();
       formData.append("botEntry", newBotEntryForm);
-      console.dir(formData)
+      console.dir(formData);
 
       this.myCroppa.generateBlob((blob) => {
-        console.log(this.file.name)
+        console.log(this.file.name);
         formData.append("profilePic", blob, this.file.name);
         const request = {
           method: "POST",
