@@ -88,7 +88,7 @@ export default {
         cache: "default",
         body: JSON.stringify(this.credentials),
       };
-      fetch("http://localhost:3000/api/users/login", request)
+      fetch("https://www.metathema.net/api/users/login", request)
         .then(async (res) => {
           const token = await res.json();
           console.log("token: " + token);

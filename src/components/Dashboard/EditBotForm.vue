@@ -371,7 +371,7 @@ export default {
     async updateBotEntry() {
       const token = localStorage.getItem("accessToken");
       const parameterURL =
-        "http://localhost:3000/api/bots/service/" +
+        "https://www.metathema.net/api/bots/service/" +
         this.editedBotEntry.service +
         "/id/" +
         this.editedBotEntry._id;
